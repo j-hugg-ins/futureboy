@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Futureboy">
+  <circle cx="100" cy="100" r="98" fill="#f2f2f2" stroke="#1a1a1a" stroke-width="4"/>
+  <g fill="none" stroke="#1a1a1a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- cap -->
+    <path d="M42 88c8-28 30-46 58-46s50 18 58 46"/>
+    <path d="M40 88h120"/>
+    <path d="M34 92c10 4 28 6 66 6s56-2 66-6"/>
+    <!-- face -->
+    <path d="M62 100c4 28 18 48 38 48s34-20 38-48"/>
+    <path d="M78 108c2 3 6 5 10 5"/>
+    <path d="M112 108c2 3 6 5 10 5"/>
+    <circle cx="84" cy="104" r="2.2" fill="#1a1a1a" stroke="none"/>
+    <circle cx="116" cy="104" r="2.2" fill="#1a1a1a" stroke="none"/>
+    <path d="M94 122c4 4 8 4 12 0"/>
+  </g>
+</svg>

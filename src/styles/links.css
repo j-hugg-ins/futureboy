@@ -1,0 +1,99 @@
+/* Sliding fill hover — dark tab rises behind text, type goes light */
+a.link-tab,
+.nav-left a,
+.nav-right a,
+.footer-links a,
+.policy-page .prose a,
+.cart-page a:not(:has(img)):not(.btn),
+.success-page a,
+.contact-page a:not(.btn) {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  padding: var(--chip-pad);
+  margin: calc(-1 * 0.35rem) calc(-1 * 0.55rem);
+  color: var(--ink);
+  text-decoration: none;
+  text-decoration-line: none;
+  transition: color 0.35s var(--ease);
+  isolation: isolate;
+}
+
+a.link-tab::before,
+.nav-left a::before,
+.nav-right a::before,
+.footer-links a::before,
+.policy-page .prose a::before,
+.cart-page a:not(:has(img)):not(.btn)::before,
+.success-page a::before,
+.contact-page a:not(.btn)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--ease);
+}
+
+a.link-tab:hover,
+a.link-tab:focus-visible,
+.nav-left a:hover,
+.nav-left a:focus-visible,
+.nav-right a:hover,
+.nav-right a:focus-visible,
+.footer-links a:hover,
+.footer-links a:focus-visible,
+.policy-page .prose a:hover,
+.policy-page .prose a:focus-visible,
+.cart-page a:not(:has(img)):not(.btn):hover,
+.cart-page a:not(:has(img)):not(.btn):focus-visible,
+.success-page a:hover,
+.success-page a:focus-visible,
+.contact-page a:not(.btn):hover,
+.contact-page a:not(.btn):focus-visible {
+  color: var(--bg-shop);
+  text-decoration: none;
+  text-decoration-line: none;
+}
+
+a.link-tab:hover::before,
+a.link-tab:focus-visible::before,
+.nav-left a:hover::before,
+.nav-left a:focus-visible::before,
+.nav-right a:hover::before,
+.nav-right a:focus-visible::before,
+.footer-links a:hover::before,
+.footer-links a:focus-visible::before,
+.policy-page .prose a:hover::before,
+.policy-page .prose a:focus-visible::before,
+.cart-page a:not(:has(img)):not(.btn):hover::before,
+.cart-page a:not(:has(img)):not(.btn):focus-visible::before,
+.success-page a:hover::before,
+.success-page a:focus-visible::before,
+.contact-page a:not(.btn):hover::before,
+.contact-page a:not(.btn):focus-visible::before {
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.link-tab,
+  .nav-left a,
+  .nav-right a,
+  .footer-links a,
+  .policy-page .prose a,
+  .cart-page a:not(:has(img)):not(.btn),
+  .success-page a,
+  .contact-page a:not(.btn),
+  a.link-tab::before,
+  .nav-left a::before,
+  .nav-right a::before,
+  .footer-links a::before,
+  .policy-page .prose a::before,
+  .cart-page a:not(:has(img)):not(.btn)::before,
+  .success-page a::before,
+  .contact-page a:not(.btn)::before {
+    transition: none;
+  }
+}

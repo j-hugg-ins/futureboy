@@ -1,0 +1,32 @@
+{
+  "name": "futureboy",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "migrate:products": "node scripts/migrate-products.mjs"
+  },
+  "dependencies": {
+    "@netlify/functions": "^5.3.0",
+    "@netlify/vite-plugin": "^2.12.9",
+    "geist": "^1.7.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1",
+    "stripe": "^22.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "oxlint": "^1.71.0",
+    "sharp": "^0.35.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1"
+  }
+}
