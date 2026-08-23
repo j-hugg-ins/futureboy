@@ -19,6 +19,8 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 | Doc | Contents |
 |-----|----------|
+| [docs/workstreams.md](docs/workstreams.md) | Five streams: Brand, Design, Production, Marketing, Shop |
+| [docs/google-drive.md](docs/google-drive.md) | Futureboy Drive root + folder IDs |
 | [docs/brand.md](docs/brand.md) | Aesthetic, voice, look |
 | [docs/suppliers.md](docs/suppliers.md) | Hat manufacturers, apparel sourcing |
 | [docs/products.md](docs/products.md) | Runs, limited editions, catalog |
@@ -29,17 +31,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 _Last updated: 2026-08-23_
 
-**Goal:** Organise Future Boy as a project brain (docs + wayfinder/tickets/grill/spec) so brand, makers, design, and site work live in one repo.
+**Goal:** Keep Future Boy organised under five workstreams; fill supplier/product context; Drive reorg only when confirmed.
 
 **Done recently:**
 
-- Set `master` / `develop` branch layout; GitHub default is `master`
-- Scaffolded personal project brain + Matt Pocock / wayfinder agent wiring
+- Set `master` / `develop`; project brain + wayfinder wiring
+- Agreed five workstreams; wrote `docs/workstreams.md` + `docs/google-drive.md`
+- Captured Aung Crown + CWT from email/Drive scan into suppliers notes
 
 **Next steps:**
 
-1. Fill brand / suppliers / products / marketing from existing notes and memory
-2. Chart a wayfinder map when ready for the next big thread (site, drop, or brand system)
+1. Continue filling brand / products / marketing docs
+2. Optional: wayfinder map for Drive rationalise or CWT sampling
 3. Point Netlify production branch at `master` if still on `main`
 
 **Blockers:**
@@ -48,16 +51,19 @@ _Last updated: 2026-08-23_
 
 ## Open items
 
-- [ ] Capture manufacturer and sourcing contacts in `docs/suppliers.md`
 - [ ] Record current hat runs / SKUs in `docs/products.md`
 - [ ] Note Instagram account and promo habits in `docs/marketing.md`
 - [ ] Confirm Netlify production branch = `master`
+- [ ] Drive move pass (only when explicitly asked)
 
 ## Glossary
 
 | Term | Meaning |
 |------|---------|
 | Future Boy | Personal apparel brand / label in this repo |
+| Workstream | One of five top-level streams: Brand, Design, Production, Marketing, Shop |
 | Run | A limited production batch of an item (not open-ended stock) |
 | Trucker | Mesh-back baseball-style cap — early Future Boy product focus |
+| CWT | Colourways / CWT Blanks (Karandeep) — UK blank supplier under sampling |
+| Aung Crown | Chinese hat manufacturer (Lydia / Alibaba) — historical production partner |
 | Click and Drop | Royal Mail UK fulfilment portal (future lean-shop interest; Shopify for now) |

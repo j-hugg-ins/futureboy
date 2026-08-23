@@ -6,7 +6,7 @@ How the engineering skills should consume this repo's domain documentation when 
 
 - **`CONTEXT.md`** at the repo root
 - **`docs/adr/`** — read ADRs that touch the area you're about to work in
-- Brand context: **`docs/brand.md`**, **`docs/suppliers.md`**, **`docs/products.md`**, **`docs/marketing.md`**, **`docs/website.md`** when the topic is brand, production, or commerce
+- Brand context: **`docs/workstreams.md`**, **`docs/google-drive.md`**, **`docs/brand.md`**, **`docs/suppliers.md`**, **`docs/products.md`**, **`docs/marketing.md`**, **`docs/website.md`** when the topic is brand, production, or commerce
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates glossary terms and ADRs lazily when terms or decisions actually get resolved.
 
@@ -19,6 +19,8 @@ Single-context repo:
 ├── CONTEXT.md
 ├── docs/
 │   ├── adr/
+│   ├── workstreams.md
+│   ├── google-drive.md
 │   ├── brand.md
 │   ├── suppliers.md
 │   ├── products.md
