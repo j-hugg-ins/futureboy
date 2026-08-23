@@ -19,7 +19,7 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 | Doc | Contents |
 |-----|----------|
-| [docs/workstreams.md](docs/workstreams.md) | Five streams: Brand, Design, Production, Marketing, Shop |
+| [docs/workstreams.md](docs/workstreams.md) | Five streams: Development, Production, Marketing, Website, Ops |
 | [docs/google-drive.md](docs/google-drive.md) | Futureboy Drive root + folder IDs |
 | [docs/brand.md](docs/brand.md) | Aesthetic, voice, look |
 | [docs/suppliers.md](docs/suppliers.md) | Hat manufacturers, apparel sourcing |
@@ -31,18 +31,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 _Last updated: 2026-08-23_
 
-**Goal:** Keep Future Boy organised under five workstreams; fill supplier/product context; Drive reorg only when confirmed.
+**Goal:** Work from new Drive five-folder layout; cherry-pick from Archive as needed; keep repo docs in sync.
 
 **Done recently:**
 
 - Set `master` / `develop`; project brain + wayfinder wiring
-- Agreed five workstreams; wrote `docs/workstreams.md` + `docs/google-drive.md`
-- Captured Aung Crown + CWT from email/Drive scan into suppliers notes
+- Drive root rebuilt: Development, Production, Marketing, Website, Ops (+ Archive with legacy)
+- Docs updated to the new five streams; Aung Crown + CWT in suppliers
 
 **Next steps:**
 
-1. Continue filling brand / products / marketing docs
-2. Optional: wayfinder map for Drive rationalise or CWT sampling
+1. Cherry-pick Archive → new folders (manual)
+2. Fill products / marketing / brand docs
 3. Point Netlify production branch at `master` if still on `main`
 
 **Blockers:**
@@ -51,17 +51,19 @@ _Last updated: 2026-08-23_
 
 ## Open items
 
+- [ ] Cherry-pick key Archive assets into live Drive folders
 - [ ] Record current hat runs / SKUs in `docs/products.md`
 - [ ] Note Instagram account and promo habits in `docs/marketing.md`
 - [ ] Confirm Netlify production branch = `master`
-- [ ] Drive move pass (only when explicitly asked)
 
 ## Glossary
 
 | Term | Meaning |
 |------|---------|
 | Future Boy | Personal apparel brand / label in this repo |
-| Workstream | One of five top-level streams: Brand, Design, Production, Marketing, Shop |
+| Workstream | One of five top-level streams: Development, Production, Marketing, Website, Ops |
+| Development | R&D, design, references, planning for new pieces (not yet an order) |
+| Production | Suppliers and assets for actual orders / runs |
 | Run | A limited production batch of an item (not open-ended stock) |
 | Trucker | Mesh-back baseball-style cap — early Future Boy product focus |
 | CWT | Colourways / CWT Blanks (Karandeep) — UK blank supplier under sampling |

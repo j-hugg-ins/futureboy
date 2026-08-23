@@ -4,19 +4,31 @@ Five top-level streams for Future Boy. Start simple; split later only if a strea
 
 | Stream | Owns | Repo notes | Drive home |
 |--------|------|------------|------------|
-| **Brand** | Identity, voice, creative ideas, speculative categories (accessories, etc.) | [brand.md](brand.md) | `BRAND` (+ ideas until a Creative split is needed) |
-| **Design** | Artwork, print files, Pantones, design tools | — | `DESIGN` |
-| **Production** | Suppliers, quotes, samples, runs / waves | [suppliers.md](suppliers.md), [products.md](products.md) | `PRODUCTION` |
-| **Marketing** | Instagram, photos, copy, stories | [marketing.md](marketing.md) | `INSTAGRAM` (treat as Marketing; rename later if useful) |
-| **Shop** | Shopify + custom site, pack/ship, light finance | [website.md](website.md) | `SHOPIFY` + `WEBSITE` + useful bits of `OPS` / `RETAIL` / `CARDS` |
+| **Development** | R&D, design, references, planning, new pieces | [brand.md](brand.md), [products.md](products.md) (ideas / catalogue notes) | [Development](https://drive.google.com/drive/folders/1byhdw1zCM8E7CxBBHZinJBO7VSsfmhCB) |
+| **Production** | Suppliers, specs, assets for **actual orders** and runs | [suppliers.md](suppliers.md), [products.md](products.md) (live runs) | [Production](https://drive.google.com/drive/folders/1vvieQ0sTNnoE1EJaPey8p0IobwBvzM4X) |
+| **Marketing** | Brand assets + promo imagery, video, ideas, Instagram | [marketing.md](marketing.md), [brand.md](brand.md) | [Marketing](https://drive.google.com/drive/folders/1154ueVPomJVt7vfNUByVF87YaqCzYEit) |
+| **Website** | Site/Shopify code notes, info, assets, copy | [website.md](website.md) | [Website](https://drive.google.com/drive/folders/1Wj2txu2gZiJG85V9--TNntsLgFgvzhBb) |
+| **Ops** | Quotes, invoices, agreements, Stripe, business details, contracts | — | [Ops](https://drive.google.com/drive/folders/1l_JQj-Y6AHLdvF0_FPA_fDb2P0RyHLlw) |
 
-**Archive** — old waves, dead experiments, superseded files. Prefer move-to-Archive over delete.
+**Archive** — superseded folders and files. Prefer move-to-Archive over delete. Legacy tree (pre–2026-08 reorg) already lives under Archive.
 
 ## How to use
 
-- **Repo** — decisions, glossaries, checklists, wayfinder maps (GitHub Issues).
+- **Repo** — decisions, glossaries, checklists, wayfinder maps (GitHub Issues); this Vite/Shopify codebase is the live Website surface.
 - **Drive** — heavy assets (artwork, photos, InDesign, PDFs, supplier packs).
-- **Wayfinder** — one map per foggy *effort* (e.g. Drive rationalise, CWT sampling), not one permanent map per stream.
+- **Wayfinder** — one map per foggy *effort*, not one permanent map per stream.
+
+## Boundary rules
+
+| Put it in… | When… |
+|------------|--------|
+| **Development** | Exploring / designing a piece that is not yet an order |
+| **Production** | Locked for a maker, sample tied to an order path, or a live run |
+| **Marketing** | Brand identity assets or anything for awareness / Instagram |
+| **Website** | Storefront, domain, copy/assets that ship on the site |
+| **Ops** | Money, contracts, Stripe, invoices, business admin |
+
+Accessories (cuffs, leather, bracelets, etc.) stay **Development** speculation until a Production order path exists.
 
 ## Active supplier focus (Production)
 
@@ -24,5 +36,3 @@ Five top-level streams for Future Boy. Start simple; split later only if a strea
 |----------|------|--------|
 | **Aung Crown** (Lydia, Alibaba) | Chinese hat manufacturer | Historical production partner (e.g. 2023 Trade Assurance); quiet recently |
 | **CWT / Colourways** (Karandeep Mattu) | UK blanks — tees, sweats, hoodies | Sampling toward blank supplier; *Stock Blanks* thread active again Aug 2026 |
-
-Accessories (cuffs, leather, bracelets, etc.) stay **Brand** speculation until Production is in play.

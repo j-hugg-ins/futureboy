@@ -23,12 +23,12 @@ _IDs, company names, and public URLs only — no passwords or API keys. Logins b
 | CWT (above) | Tees / sweats / hoodies | Primary blank path under consideration | |
 | Vend Fabrics | Wholesale blanks (explored) | Brief contact Nov 2025 (origin of garments) — not active partner | |
 
-## Speculative (Brand, not Production yet)
+## Speculative (Development, not Production yet)
 
-Accessories — cuffs, leather, bracelets, etc. Stay ideas until a supplier thread starts.
+Accessories — cuffs, leather, bracelets, etc. Stay ideas until a supplier / order path starts.
 
 ## Open threads
 
 - [ ] Resume CWT samples (sweats/hoodies) after Aug 2026 chase
 - [ ] Re-engage Aung Crown when next hat run is planned
-- [ ] Add Drive subfolders under Production when reorg runs (`Aung Crown`, `CWT`)
+- [ ] Add Drive subfolders under Production when useful (`Aung Crown`, `CWT`)

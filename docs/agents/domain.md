@@ -30,6 +30,8 @@ Single-context repo:
 └── src/
 ```
 
+Drive (live): Development · Production · Marketing · Website · Ops · Archive — see `docs/google-drive.md`.
+
 ## Use the glossary's vocabulary
 
 When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.

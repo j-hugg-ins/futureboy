@@ -5,47 +5,47 @@ Folder ID: `17yL4xg7ImRa0EYnqVk6VtmAt1mEnfvwt`
 
 Mailbox access via Minnow Tools Drive API (personal / shared as configured). IDs and URLs only — no secrets.
 
-## Workstream map
+## Live structure (verified 2026-08-23)
 
-Target shape = five streams + Archive ([workstreams.md](workstreams.md)). Current folder names are legacy; rationalise when ready (no moves until explicitly asked).
+Root contains exactly these folders — five workstreams + Archive. New stream folders are empty; cherry-pick from Archive when ready.
 
-| Workstream | Current Drive folder(s) | Folder ID |
-|------------|-------------------------|-----------|
-| **Brand** | `BRAND` | `1oGm0HavA1i-aGjAUtJyTllQFIYbnR7XU` |
-| **Design** | `DESIGN` | `1rN0g0IzWOCbXTEXlppLUJddkZNM2dK8n` |
-| **Production** | `PRODUCTION` | `1D8wCE9oZvHuvyY9pjuXYgrIDQhiZPhNC` |
-| **Marketing** | `INSTAGRAM` | `1pakWeUg4DhOW2s6tcQbpbHAl8tp40reo` |
-| **Shop** | `SHOPIFY`, `WEBSITE`, `OPS`, `RETAIL`, `CARDS` | see below |
-| **Archive** | `Archive` | `186oqRaIHTnIfYR6rIUvJXLXHYTAR6xgO` |
-| *(catalogue / R&D)* | `PRODUCT` | `1J3VV4YdK2Gp0PeRF-pSYTjbrPh9eZ-_1` |
+| Workstream | Drive folder | Folder ID |
+|------------|--------------|-----------|
+| **Development** | [Development](https://drive.google.com/drive/folders/1byhdw1zCM8E7CxBBHZinJBO7VSsfmhCB) | `1byhdw1zCM8E7CxBBHZinJBO7VSsfmhCB` |
+| **Production** | [Production](https://drive.google.com/drive/folders/1vvieQ0sTNnoE1EJaPey8p0IobwBvzM4X) | `1vvieQ0sTNnoE1EJaPey8p0IobwBvzM4X` |
+| **Marketing** | [Marketing](https://drive.google.com/drive/folders/1154ueVPomJVt7vfNUByVF87YaqCzYEit) | `1154ueVPomJVt7vfNUByVF87YaqCzYEit` |
+| **Website** | [Website](https://drive.google.com/drive/folders/1Wj2txu2gZiJG85V9--TNntsLgFgvzhBb) | `1Wj2txu2gZiJG85V9--TNntsLgFgvzhBb` |
+| **Ops** | [Ops](https://drive.google.com/drive/folders/1l_JQj-Y6AHLdvF0_FPA_fDb2P0RyHLlw) | `1l_JQj-Y6AHLdvF0_FPA_fDb2P0RyHLlw` |
+| **Archive** | [Archive](https://drive.google.com/drive/folders/186oqRaIHTnIfYR6rIUvJXLXHYTAR6xgO) | `186oqRaIHTnIfYR6rIUvJXLXHYTAR6xgO` |
 
-### Shop-related IDs
+See [workstreams.md](workstreams.md) for what each stream owns.
 
-| Folder | ID |
-|--------|-----|
-| `SHOPIFY` | `1CxOsyqyGSFBOT2FHjN4xG1TYlPGH639S` |
-| `WEBSITE` | `1CBL7bugPf2Qsn4pqWkrEIgVUDh4gH5JT` |
-| `OPS` | `1M_7CbIpdjt2cxzNZnn2gy7qZsBazzNPm` |
-| `RETAIL` | `1JxmT7LrNcWffU7TFUkYHT9tUKc_kCdTo` |
-| `CARDS` | `1GwY_ALkCt7Vl3XlriXFbyPU0Kw3GxFhl` |
+## Archive — legacy (pre-reorg)
 
-## Snapshot (as of 2026-08-23)
+Moved under Archive (IDs unchanged):
 
-Most top-level folders last touched **2022–2024**. Useful pockets:
+| Legacy folder | ID | Likely cherry-pick into |
+|---------------|-----|-------------------------|
+| `BRAND` | `1oGm0HavA1i-aGjAUtJyTllQFIYbnR7XU` | Marketing |
+| `DESIGN` | `1rN0g0IzWOCbXTEXlppLUJddkZNM2dK8n` | Development |
+| `PRODUCT` | `1J3VV4YdK2Gp0PeRF-pSYTjbrPh9eZ-_1` | Development (R&D) / Production (live runs) |
+| `PRODUCTION` | `1D8wCE9oZvHuvyY9pjuXYgrIDQhiZPhNC` | Production |
+| `INSTAGRAM` | `1pakWeUg4DhOW2s6tcQbpbHAl8tp40reo` | Marketing |
+| `WEBSITE` | `1CBL7bugPf2Qsn4pqWkrEIgVUDh4gH5JT` | Website |
+| `SHOPIFY` | `1CxOsyqyGSFBOT2FHjN4xG1TYlPGH639S` | Website |
+| `OPS` | `1M_7CbIpdjt2cxzNZnn2gy7qZsBazzNPm` | Ops |
+| `RETAIL` | `1JxmT7LrNcWffU7TFUkYHT9tUKc_kCdTo` | Marketing / Ops / Website (by file) |
+| `CARDS` | `1GwY_ALkCt7Vl3XlriXFbyPU0Kw3GxFhl` | Marketing / Ops |
+| `Hatsman` | `18p8bOgTzuTzRFtIChKYfAI9cm8pRvxOo` | Development or Archive stay |
 
-- **PRODUCTION** — Wave 2/3, Artwork, `spec-sheet`
-- **DESIGN** — HATS, TEES, ASSETS, TOOLS
-- **PRODUCT** — hats/tees/labels plus older accessory ideas (cuffs, rings, leather, etc.)
-- **BRAND** — Fonts, Logo, Wallpapers
-- **INSTAGRAM** — stories, grid, brand elements, samples
-- **RETAIL** — swing tags / lightbox (May 2024), wholesale sheets
-- **OPS** — BSCI ethics PDF
+Also loose Archive files: concept sketch PDFs, `cap---LOGO.ai`, large `Timeline---01.psd`.
 
-## Rationalise later (not done yet)
+## Cherry-pick next (manual in Drive)
 
-1. Map loose files into the five streams; move dead material to `Archive`.
-2. Under **Production**, add supplier subfolders when useful: `Aung Crown`, `CWT`.
-3. Optionally rename `INSTAGRAM` → `MARKETING`; fold `SHOPIFY` + `WEBSITE` (+ pack/ship bits) under a single **Shop** folder.
-4. Keep `PRODUCT` as live catalogue/R&D or split active SKUs into Production / Design and archive the rest.
+1. Development ← useful DESIGN / PRODUCT R&D / concept sketches  
+2. Production ← Wave packs, spec-sheet, supplier order assets; add `Aung Crown` / `CWT` when useful  
+3. Marketing ← BRAND + INSTAGRAM  
+4. Website ← WEBSITE + SHOPIFY  
+5. Ops ← quotes/invoices/agreements from OPS / RETAIL / CARDS  
 
-Do not reorganise Drive until James confirms a move pass.
+Leave the rest in Archive.
