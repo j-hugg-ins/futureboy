@@ -1,0 +1,4 @@
+{
+  "install": "bash .cursor/scripts/install-minnow-mcp.sh",
+  "start": "export PATH=\"$HOME/.local/bin:$PATH\""
+}
