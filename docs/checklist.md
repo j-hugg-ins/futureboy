@@ -1,7 +1,7 @@
 # Current checklist
 
-**Focus:** New Drive five-folder layout live; cherry-pick from Archive  
-**Detail:** See `CONTEXT.md` · [workstreams.md](workstreams.md) · [google-drive.md](google-drive.md)
+**Focus:** Hobby pace — studio budget, CWT/print when time; lazy Drive cherry-pick  
+**Detail:** See `CONTEXT.md` · [workstreams.md](workstreams.md) · [studio.md](studio.md)
 
 *Tick in Markdown preview. Commit/sync to persist. Replace this file when focus changes — not an archive.*
 
@@ -18,14 +18,18 @@
 
 ## Main tasks
 
-- [ ] Cherry-pick Archive → live folders
-- [ ] Fill `docs/brand.md` / `docs/products.md` / `docs/marketing.md`
+- [ ] Price home studio kit in `docs/studio.md` (screen print first)
+- [ ] Act on home print kit / first tee experiments (Development)
+- [ ] Resume CWT sampling (Production)
+- [ ] Fill `docs/products.md` / `docs/marketing.md`
+- [ ] Cherry-pick Archive → live folders (as needed)
 - [ ] Confirm `docs/website.md` matches Shopify-now / custom-later stance
 
 ## Done
 
 - [x] Scaffold personal project brain (no HQ / portal)
 - [x] Wire GitHub Issues for wayfinder / triage / specs / tickets
-- [x] Seed suppliers (Aung Crown, CWT)
+- [x] Seed suppliers (Aung Crown, CWT, Chris/&Sons)
 - [x] Verify new Drive folder structure; update workstream docs
+- [x] Studio budget scaffold (`docs/studio.md`)
 

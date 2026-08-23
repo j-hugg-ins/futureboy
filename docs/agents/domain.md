@@ -21,6 +21,7 @@ Single-context repo:
 │   ├── adr/
 │   ├── workstreams.md
 │   ├── google-drive.md
+│   ├── studio.md
 │   ├── brand.md
 │   ├── suppliers.md
 │   ├── products.md
