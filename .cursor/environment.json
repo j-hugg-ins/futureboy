@@ -1,4 +1,4 @@
 {
-  "install": "bash .cursor/scripts/install-minnow-mcp.sh",
+  "install": "bash .cursor/scripts/install-minnow-mcp.sh && bash .cursor/scripts/install-team-skills.sh",
   "start": "export PATH=\"$HOME/.local/bin:$PATH\""
 }
