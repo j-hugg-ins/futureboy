@@ -10,6 +10,16 @@ import {
 
 type BasketLine = { handle: string; quantity: number };
 
+/** Netlify reserves `URL`; prefer explicit PUBLIC_URL, then platform fallbacks. */
+function siteOrigin() {
+  return (
+    process.env.PUBLIC_URL ||
+    process.env.URL ||
+    process.env.DEPLOY_PRIME_URL ||
+    "http://localhost:8888"
+  );
+}
+
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new Error("STRIPE_SECRET_KEY is not set");
@@ -91,7 +101,7 @@ export default async (req: Request, _context: Context) => {
           product_data: {
             name: product.title,
             images: product.images.slice(0, 1).map((path) => {
-              const base = process.env.URL || process.env.DEPLOY_PRIME_URL || "";
+              const base = siteOrigin();
               return path.startsWith("http") ? path : `${base}${path}`;
             }),
             metadata: { sku: product.sku, handle: product.handle },
@@ -101,7 +111,7 @@ export default async (req: Request, _context: Context) => {
     }
 
     const ship = shippingFor(zone);
-    const origin = process.env.URL || process.env.DEPLOY_PRIME_URL || "http://localhost:8888";
+    const origin = siteOrigin();
 
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({

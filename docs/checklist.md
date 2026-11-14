@@ -1,7 +1,7 @@
 # Current checklist
 
-**Focus:** Hobby pace — studio budget, CWT/print when time; lazy Drive cherry-pick  
-**Detail:** See `CONTEXT.md` · [workstreams.md](workstreams.md) · [studio.md](studio.md)
+**Focus:** Custom shop go-live (smoke test / DNS / Resend); hobby studio/CWT when time  
+**Detail:** See `CONTEXT.md` · [website.md](website.md) · [studio.md](studio.md)
 
 *Tick in Markdown preview. Commit/sync to persist. Replace this file when focus changes — not an archive.*
 
@@ -14,16 +14,19 @@
 - [x] `master` / `develop` branches on GitHub
 - [x] `.cursor/environment.json` present if using Cloud Agents
 - [x] Drive root: Development, Production, Marketing, Website, Ops + Archive
-- [ ] Netlify production branch pointed at `master`
+- [x] Netlify production branch pointed at `master`
+- [x] Netlify project `futureboy` + Stripe live keys / webhook
 
 ## Main tasks
 
+- [ ] Smoke-test checkout on futureboy.netlify.app
+- [ ] Optional Resend sale emails
+- [ ] Point `futureboy.uk` DNS; update `PUBLIC_URL` + Stripe webhook
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
 - [ ] Act on home print kit / first tee experiments (Development)
 - [ ] Resume CWT sampling (Production)
 - [ ] Fill `docs/products.md` / `docs/marketing.md`
 - [ ] Cherry-pick Archive → live folders (as needed)
-- [ ] Confirm `docs/website.md` matches Shopify-now / custom-later stance
 
 ## Done
 
@@ -32,4 +35,5 @@
 - [x] Seed suppliers (Aung Crown, CWT, Chris/&Sons)
 - [x] Verify new Drive folder structure; update workstream docs
 - [x] Studio budget scaffold (`docs/studio.md`)
+- [x] Custom shop Netlify + Stripe webhook wired (PUBLIC_URL fix)
 
