@@ -30,27 +30,31 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — Shop nav + Instagram footer_
+_Last handoff: 2026-11-15 — branch `develop`_
 
-**Goal:** Smoke non-GBP checkout; Shopify residual decision still open.
+**Goal:** Decide Click & Drop fulfilment shape for futureboy.uk (Stripe only); smoke non-GBP checkout still pending.
 
-**Done recently:**
-- Nav: Shop → `/` (product list); Instagram relocated to footer (first)
-- Softened policy/contact/success copy; Terms stock = small-batch “snag it” line
-- v2.0.0; Courier Prime @ 13px; multi-currency presentment
+**Done this session:**
+- Researched Royal Mail Click & Drop custom API for futureboy.uk (Shopify out of scope for this)
+- Confirmed API can create orders, fetch tracking/labels (OBA for label PDFs), mark despatched
+- Confirmed **no C&D inbound webhook** on despatch; Shopify-era tracking email was the channel app writing back into Shopify
+- Customer shipped email must be Resend (or RM’s own recipient notifications), not a C&D callback
+
 **Next steps:**
-1. Smoke non-GBP checkout (EUR or USD) + confirm email totals
-2. Decide Shopify residual (`*.myshopify.com` only vs remove)
-3. Optional later: prune unused A/B font folders (Geist / Quattro)
+1. Choose despatch-email path: **poll C&D** while using their UI, or **ship from futureboy.uk** (mark despatched + Resend), or rely on RM recipient notifications
+2. If building: Stripe `checkout.session.completed` → `POST` Create Orders on C&D; store `orderIdentifier`; later Resend tracking mail
+3. Smoke non-GBP checkout (EUR or USD) + confirm email totals
+4. Decide Shopify residual (`*.myshopify.com` only vs remove) — separate from C&D
 
 **Blockers / landmines:**
-- Do not use Sparkinity Express Stripe for this shop
-- Never commit secrets; never read `.env` into chat
-- Leave MX + Resend DNS alone on GoDaddy
+- Do not wait for a Click & Drop despatch webhook (not in the published API)
+- One C&D API integration per account; auth key from Settings → Integrations (env only, never commit)
+- Label PDF retrieval needs OBA, not OLP
+- Do not use Sparkinity Express Stripe; never read `.env` into chat; leave MX + Resend DNS alone
 
-**Suggested skills:** `/sync`, `/grilling`
+**Suggested skills:** `/grilling` (pick poll vs ship-from-site), then implement with permission; `/sync`
 
-**Artifacts:** `docs/website.md`, Netlify project `futureboy`, Stripe `we_1Ubefh…`, Resend domain `futureboy.uk`
+**Artifacts:** `docs/website.md` (C&D notes), [C&D API help](https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API), [api.parcel.royalmail.com](https://api.parcel.royalmail.com/), Stripe webhook `netlify/functions/stripe-webhook.ts`
 
 ## Open items
 
@@ -59,6 +63,9 @@ _Last update: 2026-11-15 — Shop nav + Instagram footer_
 - [x] Customer confirmation email via Resend on `checkout.session.completed`
 - [x] Netlify TLS for `futureboy.uk` / `www`; padlock + Netlify shop (verified 2026-11-15)
 - [x] `PUBLIC_URL` + Stripe webhook on `https://futureboy.uk`
+- [ ] Choose Click & Drop despatch path (poll UI vs ship-from-site vs RM notify) for futureboy.uk
+- [ ] Optional: wire paid Stripe orders → C&D Create Orders + Resend tracking email
+- [ ] Smoke non-GBP checkout (EUR/USD) + email totals
 - [ ] Decide Shopify cutover / keep `*.myshopify.com` only
 - [ ] Price home studio kit in `docs/studio.md`
 - [ ] Cherry-pick Archive → live Drive folders (as needed)
@@ -79,4 +86,6 @@ _Last update: 2026-11-15 — Shop nav + Instagram footer_
 | CWT | Colourways / CWT Blanks (Karandeep) — UK blank supplier under sampling |
 | Aung Crown | Chinese hat manufacturer (Lydia / Alibaba) — historical production partner |
 | Chris Isherwood / &Sons | Style + home screen-print mentor; early Futureboy collaborator |
-| Click and Drop | Royal Mail UK fulfilment portal (future lean-shop interest; Shopify for now) |
+| Click and Drop | Royal Mail fulfilment portal + custom API (`api.parcel.royalmail.com`); target for futureboy.uk Stripe orders (not Shopify) |
+| OBA | Royal Mail Online Business Account — required for C&D API label PDF retrieval |
+| OLP | Online Postage account — cannot retrieve labels/docs via C&D API |

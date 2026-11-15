@@ -40,6 +40,8 @@
 - [x] Softened policy/contact/success copy; Terms stock line = small-batch snag-it note
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
+- [ ] Choose Click & Drop path for futureboy.uk (poll vs ship-from-site vs RM notify); Shopify not in scope for C&D
+- [ ] Optional: Stripe paid → C&D Create Orders; Resend tracking on despatch (no C&D webhook)
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
 - [ ] Act on home print kit / first tee experiments (Development)

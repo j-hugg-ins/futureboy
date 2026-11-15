@@ -36,6 +36,21 @@ Passed 2026-11-15 (Shermer £5): Checkout paid, `checkout.session.completed` web
 
 Order emails (seller + customer) use a shared HTML brand wrap: centred `futureboy-logo-light-reg.png`, large headline, borderless product/shipping/total rows, footer. Customer body switches on total quantity (1 vs 2+). Plain-text fallback included.
 
+## Click & Drop (planned — futureboy.uk only)
+
+Royal Mail Click & Drop custom API for Stripe shop fulfilment. **Do not** rebuild around Shopify; the old Shopify C&D channel is convenience history only.
+
+| Topic | Notes |
+|-------|--------|
+| Docs | [Help centre](https://help.parcel.royalmail.com/hc/en-gb/articles/360011462338-Integrating-with-the-Click-Drop-API) · [OpenAPI](https://api.parcel.royalmail.com/) |
+| Auth | One API integration per C&D account; key in `Authorization` header (env only) |
+| Create orders | `POST /api/v1/orders` from Stripe `checkout.session.completed` |
+| Tracking / labels | Available via create/get orders + labels; label PDFs need **OBA** (not OLP) |
+| Despatch | API can mark despatched; **no inbound webhook** when you despatch in the C&D UI |
+| Customer email | Resend “shipped” with tracking URL (or RM `receiveEmailNotification` / `sendNotificationsTo: recipient`) |
+
+**Open design choice:** poll C&D for newly labelled/despatched orders while staying in their UI, or ship from futureboy.uk (call C&D + Resend), or lean on Royal Mail’s own recipient notifications.
+
 ## Open threads
 
 - [x] Paid smoke test + Resend seller email
@@ -43,5 +58,7 @@ Order emails (seller + customer) use a shared HTML brand wrap: centred `futurebo
 - [x] Customer confirmation email
 - [x] Branded HTML order emails
 - [x] Netlify TLS for `futureboy.uk` complete
+- [ ] Choose C&D despatch-email path (poll vs ship-from-site vs RM notify)
+- [ ] Optional: implement Stripe → C&D create + Resend tracking
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
 - [x] Set `EMAIL_PREVIEW_SECRET` on Netlify + smoke `POST /api/email-preview` (seller + ONE + TWO)
