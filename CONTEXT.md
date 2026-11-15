@@ -30,20 +30,21 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — email preview endpoint_
+_Last update: 2026-11-15 — email preview smoked_
 
-**Goal:** Set `EMAIL_PREVIEW_SECRET` on Netlify; smoke `POST /api/email-preview`; decide Shopify residual.
+**Goal:** Review preview mails in inbox; decide Shopify residual.
 
 **Done recently:**
-- Gated `/api/email-preview` (sample ONE / TWO / seller) sharing brand wrap with webhook
-- Synced branded HTML emails + header light/dark ® SVGs to `master`
-- Logo PNG live at `/brand/futureboy-logo-light-reg.png`
+- `POST /api/email-preview` live + smoked (seller, ONE, TWO → `SALE_NOTIFY_EMAIL`)
+- `EMAIL_PREVIEW_SECRET` set on Netlify; shared order-email helpers with webhook
+- Branded HTML emails + header light/dark ® SVGs on `master`
 - Paid smoke test OK (2026-11-15): £5 Shermer; webhook 200; seller email delivered
 
 **Next steps:**
-1. Add `EMAIL_PREVIEW_SECRET` to Netlify (+ local `.env`); deploy; `curl` preview endpoint
-2. Decide Shopify residual (`*.myshopify.com` only vs remove)
-3. Refund £5 test payment if not already
+1. Check inbox for three `[preview]` emails; tweak copy/layout if needed
+2. Copy `EMAIL_PREVIEW_SECRET` into local `.env` from Netlify if you want local curls
+3. Decide Shopify residual (`*.myshopify.com` only vs remove)
+4. Refund £5 test payment if not already
 
 **Blockers / landmines:**
 - Do not use Sparkinity Express Stripe for this shop

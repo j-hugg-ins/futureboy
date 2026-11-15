@@ -41,4 +41,4 @@ Order emails (seller + customer) use a shared HTML brand wrap: centred `futurebo
 - [x] Branded HTML order emails
 - [x] Netlify TLS for `futureboy.uk` complete
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
-- [ ] Set `EMAIL_PREVIEW_SECRET` on Netlify + smoke `POST /api/email-preview`
+- [x] Set `EMAIL_PREVIEW_SECRET` on Netlify + smoke `POST /api/email-preview` (seller + ONE + TWO)

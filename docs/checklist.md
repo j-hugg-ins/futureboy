@@ -26,7 +26,7 @@
 - [x] Customer confirmation email via Resend
 - [x] Branded HTML order emails (logo, qty copy, table, footer) — on `master`
 - [x] Gated `/api/email-preview` for sample ONE / TWO / seller
-- [ ] Set `EMAIL_PREVIEW_SECRET` on Netlify and smoke preview endpoint
+- [x] Set `EMAIL_PREVIEW_SECRET` on Netlify and smoke preview endpoint
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
