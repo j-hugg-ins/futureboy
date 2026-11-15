@@ -40,7 +40,7 @@ _Last update: 2026-11-15 — TLS verified on custom domain_
 - Prior: Futureboy Standard Stripe, Resend domain verified, GoDaddy DNS → Netlify
 
 **Next steps:**
-1. Place one refundable live order on https://futureboy.uk (pricing fix live on master)
+1. Place one refundable live order of **Shermer** (£5 test price) on https://futureboy.uk; then restore Shermer to £45
 2. Confirm Stripe payment, `/success`, Resend sale email to `james@futureboy.uk`
 3. Decide Shopify residual (`*.myshopify.com` only vs remove)
 
