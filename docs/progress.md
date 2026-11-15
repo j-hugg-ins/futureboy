@@ -4,6 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-15 | Footer: disclaimer above copyright, text-wrap balance, natural breaks | Review latest [preview] mails |
 | 2026-11-15 | Email layout polish: ~70% logo, grey table rules, tighter footer, more padding | Re-smoke preview; review inbox |
 | 2026-11-15 | Preview endpoint smoked: seller + ONE + TWO to SALE_NOTIFY_EMAIL | Review inbox; optional copy tweaks |
 | 2026-11-15 | Added gated `/api/email-preview` + shared order-email helpers | Set EMAIL_PREVIEW_SECRET on Netlify; curl smoke |
