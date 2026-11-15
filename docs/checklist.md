@@ -20,7 +20,7 @@
 
 ## Main tasks
 
-- [ ] Deploy per-product pricing fix to `master`
+- [x] Deploy per-product pricing fix to `master`
 - [ ] Smoke-test paid checkout + sale email on https://futureboy.uk
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)

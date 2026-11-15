@@ -4,7 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
-| 2026-11-15 | Per-product Stripe pricing via `pricePence` in products.json; removed global PRICE_PENCE | Deploy to master; paid smoke test on futureboy.uk |
+| 2026-11-15 | Per-product Stripe pricing via `pricePence`; merged `/prod` to master (`ca0ed47`) | Wait for Netlify; paid smoke test on futureboy.uk |
 | 2026-11-15 | Verified futureboy.uk live: TLS, Netlify shop, PUBLIC_URL + Stripe webhook on custom domain | Paid smoke test + Resend sale email on futureboy.uk |
 | 2026-11-14 | Session handoff: Stripe/Resend/DNS cutover; TLS pending; smoke test outstanding | Paid smoke test on netlify.app; wait for futureboy.uk cert |
 | 2026-11-14 | Netlify `futureboy` + live Stripe webhook; checkout uses `PUBLIC_URL` | Smoke test; Resend optional; point futureboy.uk DNS |
