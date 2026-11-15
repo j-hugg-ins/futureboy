@@ -4,6 +4,8 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-15 | Restored Shermer to £45; Resend customer order confirmation on webhook | Deploy; optional second smoke or Stripe event resend |
+| 2026-11-15 | Smoke test passed: £5 Shermer paid, webhook 200, Resend seller email; no customer receipt yet | Restore Shermer to £45; optional buyer email |
 | 2026-11-15 | Shermer temporarily £5 for live smoke test; package.json → 0.9.0 | Deploy; buy Shermer; restore £45 after test |
 | 2026-11-15 | Per-product Stripe pricing via `pricePence`; merged `/prod` to master (`ca0ed47`) | Wait for Netlify; paid smoke test on futureboy.uk |
 | 2026-11-15 | Verified futureboy.uk live: TLS, Netlify shop, PUBLIC_URL + Stripe webhook on custom domain | Paid smoke test + Resend sale email on futureboy.uk |

@@ -32,17 +32,17 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 _Last update: 2026-11-15 — TLS verified on custom domain_
 
-**Goal:** Complete first paid smoke test on https://futureboy.uk (Stripe + Resend).
+**Goal:** Confirm customer order email on next live order; decide Shopify residual.
 
 **Done recently:**
-- Checkout now charges each product’s `pricePence` from `src/data/products.json` (removed global `PRICE_PENCE`)
-- Verified live (2026-11-15): `futureboy.uk` TLS OK; Netlify primary URL; `PUBLIC_URL` + Stripe webhook on custom domain
-- Prior: Futureboy Standard Stripe, Resend domain verified, GoDaddy DNS → Netlify
+- Restored Shermer to £45; webhook now sends seller alert + customer confirmation via Resend
+- Paid smoke test OK (2026-11-15): £5 Shermer paid; webhook 200; seller email delivered
+- Per-product `pricePence` Checkout; `futureboy.uk` TLS + webhook live
 
 **Next steps:**
-1. Place one refundable live order of **Shermer** (£5 test price) on https://futureboy.uk; then restore Shermer to £45
-2. Confirm Stripe payment, `/success`, Resend sale email to `james@futureboy.uk`
-3. Decide Shopify residual (`*.myshopify.com` only vs remove)
+1. Smoke-check customer confirmation on next paid order (or Stripe webhook resend)
+2. Decide Shopify residual (`*.myshopify.com` only vs remove)
+3. Refund £5 test payment if not already
 
 **Blockers / landmines:**
 - Do not use Sparkinity Express Stripe for this shop
@@ -55,7 +55,9 @@ _Last update: 2026-11-15 — TLS verified on custom domain_
 
 ## Open items
 
-- [ ] Smoke-test paid checkout + Resend sale email on https://futureboy.uk
+- [x] Smoke-test paid checkout + Resend sale email on https://futureboy.uk (Shermer £5)
+- [x] Restore Shermer to £45 after smoke test
+- [x] Customer confirmation email via Resend on `checkout.session.completed`
 - [x] Netlify TLS for `futureboy.uk` / `www`; padlock + Netlify shop (verified 2026-11-15)
 - [x] `PUBLIC_URL` + Stripe webhook on `https://futureboy.uk`
 - [ ] Decide Shopify cutover / keep `*.myshopify.com` only

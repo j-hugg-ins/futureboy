@@ -24,9 +24,9 @@ For Stripe functions locally, use Netlify’s Vite plugin (`npm run dev`) with e
 2. Set `STRIPE_SECRET_KEY` in Netlify env (and local `.env`).
 3. Set `PUBLIC_URL` to the public site origin (Netlify reserves the name `URL`). Example: `https://futureboy.netlify.app`, later `https://futureboy.uk`.
 4. Add webhook endpoint: `https://<site>/api/stripe-webhook` for `checkout.session.completed`.
-5. Set `STRIPE_WEBHOOK_SECRET`, and optionally `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM`.
+5. Set `STRIPE_WEBHOOK_SECRET`, and for emails `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM` (seller alert + customer confirmation).
 
-Checkout validates prices server-side (£45) and locks shipping countries to the zone chosen in the cart:
+Checkout charges each product’s `pricePence` and locks shipping countries to the zone chosen in the cart:
 
 | Zone | Rate |
 |------|------|

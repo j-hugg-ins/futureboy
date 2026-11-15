@@ -21,7 +21,9 @@
 ## Main tasks
 
 - [x] Deploy per-product pricing fix to `master`
-- [ ] Smoke-test paid checkout + sale email on https://futureboy.uk
+- [x] Smoke-test paid checkout + sale email on https://futureboy.uk (Shermer £5)
+- [x] Restore Shermer `pricePence` to 4500
+- [x] Customer confirmation email via Resend
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)

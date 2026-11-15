@@ -7,14 +7,76 @@ function getStripe() {
   return new Stripe(key);
 }
 
-async function sendSaleEmail(session: Stripe.Checkout.Session) {
+function formatGBP(pence: number) {
+  return `£${(pence / 100).toFixed(2)}`;
+}
+
+function lineSummary(full: Stripe.Checkout.Session) {
+  return (
+    full.line_items?.data
+      .map(
+        (li) =>
+          `• ${li.quantity}× ${li.description} — ${formatGBP(li.amount_total || 0)}`,
+      )
+      .join("\n") || "• (no line items)"
+  );
+}
+
+function shippingAmount(full: Stripe.Checkout.Session) {
+  return full.shipping_cost
+    ? formatGBP(full.shipping_cost.amount_total || 0)
+    : "—";
+}
+
+function shipToBlock(full: Stripe.Checkout.Session) {
+  const address = full.customer_details?.address;
+  if (!address) return "No address";
+  return [
+    full.customer_details?.name,
+    address.line1,
+    address.line2,
+    [address.city, address.postal_code].filter(Boolean).join(" "),
+    address.country,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+async function sendResendEmail(opts: {
+  apiKey: string;
+  from: string;
+  to: string;
+  subject: string;
+  text: string;
+}) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${opts.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: opts.from,
+      to: [opts.to],
+      subject: opts.subject,
+      text: opts.text,
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Resend failed: ${res.status} ${body}`);
+  }
+}
+
+async function sendOrderEmails(session: Stripe.Checkout.Session) {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.SALE_NOTIFY_EMAIL;
+  const sellerTo = process.env.SALE_NOTIFY_EMAIL;
   const from =
     process.env.SALE_NOTIFY_FROM || "Futureboy <onboarding@resend.dev>";
 
-  if (!apiKey || !to) {
-    console.warn("Skipping sale email — RESEND_API_KEY or SALE_NOTIFY_EMAIL missing");
+  if (!apiKey) {
+    console.warn("Skipping order emails — RESEND_API_KEY missing");
     return;
   }
 
@@ -23,74 +85,75 @@ async function sendSaleEmail(session: Stripe.Checkout.Session) {
     expand: ["line_items", "payment_intent"],
   });
 
-  const paymentId =
-    typeof full.payment_intent === "string"
-      ? full.payment_intent
-      : full.payment_intent?.id;
+  const lines = lineSummary(full);
+  const ship = shippingAmount(full);
+  const total = formatGBP(full.amount_total || 0);
+  const addressBlock = shipToBlock(full);
 
-  const isTest = (process.env.STRIPE_SECRET_KEY || "").includes("test");
-  const dashboardUrl = paymentId
-    ? `https://dashboard.stripe.com/${isTest ? "test/" : ""}payments/${paymentId}`
-    : `https://dashboard.stripe.com/${isTest ? "test/" : ""}checkout/sessions/${full.id}`;
+  if (sellerTo) {
+    const paymentId =
+      typeof full.payment_intent === "string"
+        ? full.payment_intent
+        : full.payment_intent?.id;
 
-  const lines =
-    full.line_items?.data
-      .map(
-        (li) =>
-          `• ${li.quantity}× ${li.description} — £${((li.amount_total || 0) / 100).toFixed(2)}`,
-      )
-      .join("\n") || "• (no line items)";
+    const isTest = (process.env.STRIPE_SECRET_KEY || "").includes("test");
+    const dashboardUrl = paymentId
+      ? `https://dashboard.stripe.com/${isTest ? "test/" : ""}payments/${paymentId}`
+      : `https://dashboard.stripe.com/${isTest ? "test/" : ""}checkout/sessions/${full.id}`;
 
-  const ship = full.shipping_cost
-    ? `£${((full.shipping_cost.amount_total || 0) / 100).toFixed(2)}`
-    : "—";
-
-  const address = full.customer_details?.address;
-  const addressBlock = address
-    ? [
-        full.customer_details?.name,
-        address.line1,
-        address.line2,
-        [address.city, address.postal_code].filter(Boolean).join(" "),
-        address.country,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    : "No address";
-
-  const subject = `Futureboy sale — £${((full.amount_total || 0) / 100).toFixed(2)}`;
-  const text = [
-    "New Futureboy order",
-    "",
-    lines,
-    "",
-    `Shipping: ${ship}`,
-    `Total: £${((full.amount_total || 0) / 100).toFixed(2)}`,
-    `Customer: ${full.customer_details?.email || "—"}`,
-    "",
-    "Ship to:",
-    addressBlock,
-    "",
-    `Stripe Dashboard: ${dashboardUrl}`,
-  ].join("\n");
-
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+    await sendResendEmail({
+      apiKey,
       from,
-      to: [to],
-      subject,
-      text,
-    }),
-  });
+      to: sellerTo,
+      subject: `Futureboy sale — ${total}`,
+      text: [
+        "New Futureboy order",
+        "",
+        lines,
+        "",
+        `Shipping: ${ship}`,
+        `Total: ${total}`,
+        `Customer: ${full.customer_details?.email || "—"}`,
+        "",
+        "Ship to:",
+        addressBlock,
+        "",
+        `Stripe Dashboard: ${dashboardUrl}`,
+      ].join("\n"),
+    });
+  } else {
+    console.warn("Skipping seller email — SALE_NOTIFY_EMAIL missing");
+  }
 
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Resend failed: ${res.status} ${body}`);
+  const customerEmail = full.customer_details?.email?.trim();
+  if (customerEmail) {
+    const name = full.customer_details?.name?.split(" ")[0] || "there";
+    await sendResendEmail({
+      apiKey,
+      from,
+      to: customerEmail,
+      subject: `Thanks for your Futureboy order — ${total}`,
+      text: [
+        `Hi ${name},`,
+        "",
+        "Thanks for your order. Payment went through and we're getting it ready to ship.",
+        "",
+        lines,
+        "",
+        `Shipping: ${ship}`,
+        `Total: ${total}`,
+        "",
+        "Ship to:",
+        addressBlock,
+        "",
+        "If anything looks off, just reply to this email.",
+        "",
+        "— Futureboy",
+        "https://futureboy.uk",
+      ].join("\n"),
+    });
+  } else {
+    console.warn("Skipping customer email — no customer email on session");
   }
 }
 
@@ -126,9 +189,9 @@ export default async (req: Request, _context: Context) => {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     try {
-      await sendSaleEmail(session);
+      await sendOrderEmails(session);
     } catch (err) {
-      console.error("Sale email failed", err);
+      console.error("Order email failed", err);
       return new Response("Email failed", { status: 500 });
     }
   }
