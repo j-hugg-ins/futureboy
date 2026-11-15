@@ -37,6 +37,7 @@
 - [x] Presentment currency switcher (GBP/EUR/USD/CAD/JPY); IP default; Stripe Checkout in selected currency
 - [x] Type: Courier Prime on `--font-sans`; root 13px (sticking for now; unused A/B fonts optional prune later)
 - [x] Version 2.0.0 in package.json; footer shows version left of © Futureboy year
+- [x] Softened policy/contact/success copy; Terms stock line = small-batch snag-it note
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)

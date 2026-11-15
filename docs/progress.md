@@ -4,6 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-15 | Softened policy/contact/success copy; Terms stock snag-it line | Smoke non-GBP checkout |
 | 2026-11-15 | v2.0.0; footer version + © Futureboy year; Courier Prime @ 13px | /prod then smoke non-GBP checkout |
 | 2026-11-15 | Type settled for now: Courier Prime + 13px root | Smoke non-GBP checkout; optional prune A/B fonts later |
 | 2026-11-15 | Type A/B: Quattro too narrow → Courier Prime on `--font-sans` | Kept; size bump applied |

@@ -30,13 +30,13 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — v2.0.0 footer + /prod_
+_Last update: 2026-11-15 — policy copy /prod_
 
-**Goal:** Production ship of currency + type + footer version; then smoke non-GBP.
+**Goal:** Smoke non-GBP checkout; Shopify residual decision still open.
 
 **Done recently:**
-- `package.json` → 2.0.0; footer `2.0.0 © Futureboy {year}` from Vite `__APP_VERSION__`
-- Type: Courier Prime @ 13px; multi-currency Checkout presentment
+- Softened policy/contact/success copy; Terms stock = small-batch “snag it” line
+- v2.0.0; Courier Prime @ 13px; multi-currency presentment
 **Next steps:**
 1. Smoke non-GBP checkout (EUR or USD) + confirm email totals
 2. Decide Shopify residual (`*.myshopify.com` only vs remove)

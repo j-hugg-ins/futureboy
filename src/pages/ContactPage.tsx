@@ -36,7 +36,7 @@ export function ContactPage() {
         <h1 className="static-page__title">Contact</h1>
         {status === "sent" ? (
           <p className="static-page__copy">
-            Thanks, got it. I will get back to you soon.
+            Got it, thanks. I will reply when I can, usually pretty quickly.
           </p>
         ) : (
           <form
@@ -70,7 +70,8 @@ export function ContactPage() {
             </button>
             {status === "error" ? (
               <p className="error">
-                Something went wrong. Try again or email directly.
+                That did not go through. Try once more, or give it a minute and
+                try again.
               </p>
             ) : null}
           </form>

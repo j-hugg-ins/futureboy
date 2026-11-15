@@ -31,19 +31,21 @@ export function PolicyPage() {
       body: (
         <>
           <p>
-            I ship everything from the UK. I usually get orders out within 24
-            hours, and I will send tracking when I have it.
+            Everything goes out from the UK. I am usually packing within a day,
+            and I will pass on tracking once the label exists. I am not a giant
+            warehouse, so if something slips a bit, bear with me.
           </p>
           <p>
-            Your cart may show an estimate based on where you are. I lock in the
-            exact rate at checkout once your address is set. The rates below
-            follow the currency you have selected (I set shop prices in GBP).
+            The cart tries to guess shipping from where you seem to be. The real
+            rate lands at checkout when you put your address in. The table below
+            follows whatever currency you have picked on the site; I still price
+            the shop in GBP underneath.
           </p>
           <h2>Rates</h2>
           {shippingRatesTable}
           <p>
-            Amounts are estimates at current exchange rates. The exact value is
-            calculated at checkout.
+            Those converted amounts can wander a little with the exchange rate.
+            Checkout has the final say.
           </p>
         </>
       ),
@@ -53,13 +55,15 @@ export function PolicyPage() {
       body: (
         <>
           <p>
-            If something arrives damaged or wrong, drop me a line via the{" "}
-            <Link to="/contact">contact form</Link> with a couple of photos and
-            I will sort a replacement or refund.
+            If it turns up smashed, wrong, or somehow not what you ordered, tell
+            me via the <Link to="/contact">contact form</Link> and send a couple
+            of photos. I will sort a replacement or a refund without making you
+            write an essay.
           </p>
           <p>
-            I take returns on unworn items in original condition within 14 days
-            of delivery. Please message me first before posting anything back.
+            Unworn stuff in the same nick it left in can come back within 14 days
+            of delivery. Message me first though; do not just post a hat into the
+            void and hope for the best.
           </p>
         </>
       ),
@@ -69,17 +73,17 @@ export function PolicyPage() {
       body: (
         <>
           <p>
-            I only keep what I need to run the shop: messages you send through
-            the contact form, and the order details Stripe needs to take
-            payment.
+            I am not collecting a dossier on you. I keep contact-form messages,
+            and whatever order bits Stripe needs so the payment actually works.
+            That is about it.
           </p>
           <p>
-            I do not sell your data. Your card details never touch my servers;
-            Stripe handles checkout.
+            I do not sell your data, and I have no interest in trying. Your card
+            never hits my servers; Stripe runs checkout.
           </p>
           <p>
-            Questions about your data? Use the{" "}
-            <Link to="/contact">contact form</Link> and I will help.
+            If you want to know what I hold, or want it gone, use the{" "}
+            <Link to="/contact">contact form</Link> and I will sort it.
           </p>
         </>
       ),
@@ -89,16 +93,17 @@ export function PolicyPage() {
       body: (
         <>
           <p>
-            When you order from me, you are buying as described on the site. I
-            set prices in GBP. You can browse and pay in GBP, EUR, USD, CAD, or
-            JPY with the currency switcher; checkout charges the converted total
-            in the currency you pick. Shipping is whatever rate applies to your
-            address at checkout.
+            Order from me and you are buying the thing as it is described here,
+            not a fantasy version of it. Prices live in GBP. You can poke around
+            and pay in GBP, EUR, USD, CAD, or JPY with the switcher; checkout
+            charges the converted total in whatever you picked. Shipping is the
+            rate that matches your address when you check out.
           </p>
           <p>
-            Colours can look a bit different depending on your screen. Stock
-            moves; if something is sold out I leave it listed but you cannot buy
-            it until it is back.
+            Screens lie a little about colour, so treat photos as a guide rather
+            than gospel. Stock is pretty limited as I only produce small batch
+            runs. I will re-stock from time to time but never sure when so
+            basically, if you like something, snag it! :)
           </p>
         </>
       ),
