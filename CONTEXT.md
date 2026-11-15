@@ -40,7 +40,7 @@ _Last update: 2026-11-15 — TLS verified on custom domain_
 - Prior: Futureboy Standard Stripe, Resend domain verified, GoDaddy DNS → Netlify
 
 **Next steps:**
-1. Merge/deploy pricing fix to `master`, then place one refundable live order on https://futureboy.uk
+1. Place one refundable live order on https://futureboy.uk (pricing fix live on master)
 2. Confirm Stripe payment, `/success`, Resend sale email to `james@futureboy.uk`
 3. Decide Shopify residual (`*.myshopify.com` only vs remove)
 
