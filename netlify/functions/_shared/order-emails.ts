@@ -112,8 +112,8 @@ function brandEmailHtml(opts: {
   const headline = opts.headline
     ? `<h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:600;color:#262626;letter-spacing:-0.02em;">${escapeHtml(opts.headline)}</h1>`
     : "";
-  const legend = opts.customerFooter
-    ? `<br /><br />You're receiving this email because you're a legend and just splashed some cash on the Futureboy website.`
+  const disclaimer = opts.customerFooter
+    ? `<p style="margin:0 0 1.5em;text-wrap:balance;">You're receiving this email because you're a legend and just splashed some cash on the Futureboy website.</p>`
     : "";
 
   return `<!DOCTYPE html>
@@ -145,7 +145,8 @@ function brandEmailHtml(opts: {
           </tr>
           <tr>
             <td style="padding:28px 36px 44px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.35;color:#666666;text-align:center;">
-              <p style="margin:0;">© Futureboy ${year}.<br />Designed by J.${legend}</p>
+              ${disclaimer}
+              <p style="margin:0;text-wrap:balance;">© Futureboy ${year}.<br />Designed by J.</p>
             </td>
           </tr>
         </table>
@@ -188,12 +189,12 @@ function customerBodyCopy(qty: number) {
 
 function footerText(customerFooter: boolean) {
   const year = new Date().getFullYear();
-  const base = [`© Futureboy ${year}.`, "Designed by J."];
-  if (!customerFooter) return base.join("\n");
+  const copyright = [`© Futureboy ${year}.`, "Designed by J."].join("\n");
+  if (!customerFooter) return copyright;
   return [
-    ...base,
-    "",
     "You're receiving this email because you're a legend and just splashed some cash on the Futureboy website.",
+    "",
+    copyright,
   ].join("\n");
 }
 
