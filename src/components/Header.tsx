@@ -13,15 +13,9 @@ export function Header() {
   return (
     <header className="site-header site-header--solid">
       <nav className="nav-left" aria-label="Primary">
+        <Link to="/">Shop</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
-        <a
-          href="https://www.instagram.com/futureboy.uk"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Instagram
-        </a>
       </nav>
 
       <Link to="/" className="brand-logo" aria-label="Futureboy home">

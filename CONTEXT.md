@@ -30,11 +30,12 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — policy copy /prod_
+_Last update: 2026-11-15 — Shop nav + Instagram footer_
 
 **Goal:** Smoke non-GBP checkout; Shopify residual decision still open.
 
 **Done recently:**
+- Nav: Shop → `/` (product list); Instagram relocated to footer (first)
 - Softened policy/contact/success copy; Terms stock = small-batch “snag it” line
 - v2.0.0; Courier Prime @ 13px; multi-currency presentment
 **Next steps:**

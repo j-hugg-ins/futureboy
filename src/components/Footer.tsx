@@ -6,6 +6,16 @@ export function Footer() {
       <div className="footer-inner">
         <ul className="footer-links">
           <li>
+            <a
+              className="link-tab"
+              href="https://www.instagram.com/futureboy.uk"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram
+            </a>
+          </li>
+          <li>
             <Link className="link-tab" to="/policies/shipping">
               Shipping
             </Link>
