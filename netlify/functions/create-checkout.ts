@@ -3,7 +3,6 @@ import Stripe from "stripe";
 import products from "../../src/data/products.json";
 import {
   EUROPE_COUNTRIES,
-  PRICE_PENCE,
   ROW_COUNTRIES,
   type ShippingZone,
 } from "./_shared/shipping";
@@ -88,6 +87,13 @@ export default async (req: Request, _context: Context) => {
           { status: 400 },
         );
       }
+      const unitAmount = Math.floor(Number(product.pricePence));
+      if (!Number.isFinite(unitAmount) || unitAmount < 1) {
+        return Response.json(
+          { error: `Invalid price for ${product.title}` },
+          { status: 400 },
+        );
+      }
       const qty = Math.floor(Number(line.quantity));
       if (!Number.isFinite(qty) || qty < 1 || qty > 20) {
         return Response.json({ error: "Invalid quantity" }, { status: 400 });
@@ -97,7 +103,7 @@ export default async (req: Request, _context: Context) => {
         quantity: qty,
         price_data: {
           currency: "gbp",
-          unit_amount: PRICE_PENCE,
+          unit_amount: unitAmount,
           product_data: {
             name: product.title,
             images: product.images.slice(0, 1).map((path) => {

@@ -1,6 +1,6 @@
 # Current checklist
 
-**Focus:** Paid smoke test + finish `futureboy.uk` TLS; hobby studio/CWT when time  
+**Focus:** Paid smoke test on `futureboy.uk`; hobby studio/CWT when time  
 **Detail:** See `CONTEXT.md` · [website.md](website.md) · [studio.md](studio.md)
 
 *Tick in Markdown preview. Commit/sync to persist. Replace this file when focus changes — not an archive.*
@@ -20,8 +20,10 @@
 
 ## Main tasks
 
-- [ ] Smoke-test paid checkout + sale email (use netlify.app if custom TLS pending)
-- [ ] Wait for Netlify TLS on `futureboy.uk`; confirm shop + webhook on custom domain
+- [ ] Deploy per-product pricing fix to `master`
+- [ ] Smoke-test paid checkout + sale email on https://futureboy.uk
+- [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
+- [x] Checkout uses per-product `pricePence` (not global constant)
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
 - [ ] Act on home print kit / first tee experiments (Development)

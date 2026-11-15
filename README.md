@@ -36,7 +36,7 @@ Checkout validates prices server-side (£45) and locks shipping countries to the
 
 ## Catalog
 
-Products live in `src/data/products.json` with images under `public/products/{handle}/`. Mark sold-out with `"available": false` and redeploy.
+Products live in `src/data/products.json` with images under `public/products/{handle}/`. Edit per-product fields there (including `pricePence`); Checkout charges each product’s `pricePence`. Mark sold-out with `"available": false` and redeploy.
 
 Re-pull from Shopify (while it still exists):
 

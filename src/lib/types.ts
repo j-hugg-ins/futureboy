@@ -43,8 +43,6 @@ export const SHIPPING = {
   },
 } as const;
 
-export const PRICE_PENCE = 4500;
-
 export function formatGBP(pence: number): string {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",

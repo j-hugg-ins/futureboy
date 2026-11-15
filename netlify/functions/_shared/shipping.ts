@@ -1,5 +1,3 @@
-export const PRICE_PENCE = 4500;
-
 export type ShippingZone = "uk" | "europe" | "row";
 
 export const EUROPE_COUNTRIES = [

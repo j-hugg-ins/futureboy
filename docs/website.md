@@ -6,8 +6,9 @@ Commerce and site stack for Future Boy.
 
 | Surface | Role |
 |---------|------|
-| **Custom shop** | Netlify + Stripe Checkout — https://futureboy.netlify.app (reliable) |
-| **Custom domain** | `futureboy.uk` DNS → Netlify; TLS certificate still provisioning |
+| **Custom shop** | Netlify + Stripe Checkout — https://futureboy.uk (primary) |
+| **Custom domain** | `futureboy.uk` DNS → Netlify; TLS live (Let's Encrypt, apex + www) |
+| **Alias** | https://futureboy.netlify.app still serves the same deploy |
 | **Shopify** | Still exists on `futureboy-xyz.myshopify.com`; apex DNS no longer intentional for Shopify |
 | **Branches** | `develop` day-to-day; `master` production |
 
@@ -27,12 +28,12 @@ Build `npm run build`, publish `dist`, production branch **`master`**.
 
 ## Smoke test (next)
 
-1. If custom-domain TLS not ready: point `PUBLIC_URL` + Stripe webhook at `https://futureboy.netlify.app` temporarily
-2. Place one refundable live order; confirm Stripe payment, `/success`, Resend sale email
-3. When `https://futureboy.uk` shows Netlify shop with valid padlock, set `PUBLIC_URL` + webhook to `https://futureboy.uk`
+1. Place one refundable live order on https://futureboy.uk
+2. Confirm Stripe payment, `/success`, Resend sale email (`james@futureboy.uk`)
+3. `PUBLIC_URL` and webhook already on `https://futureboy.uk` (verified 2026-11-15)
 
 ## Open threads
 
 - [ ] Paid smoke test + Resend email
-- [ ] Netlify TLS for `futureboy.uk` complete
+- [x] Netlify TLS for `futureboy.uk` complete
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
