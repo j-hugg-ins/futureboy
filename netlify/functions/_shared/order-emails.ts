@@ -71,8 +71,8 @@ function orderTableHtml(order: OrderEmailData) {
         : "border-bottom:1px solid #666666;";
       return `
       <tr>
-        <td style="padding:10px 12px 10px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;vertical-align:top;">${escapeHtml(row.label)}</td>
-        <td style="padding:10px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(row.amount)}</td>
+        <td style="padding:6px 12px 6px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;vertical-align:top;">${escapeHtml(row.label)}</td>
+        <td style="padding:6px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(row.amount)}</td>
       </tr>`;
     })
     .join("");
