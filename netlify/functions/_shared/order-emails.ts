@@ -62,18 +62,23 @@ function orderTableRows(order: OrderEmailData) {
 }
 
 function orderTableHtml(order: OrderEmailData) {
-  const rows = orderTableRows(order)
-    .map(
-      (row) => `
+  const allRows = orderTableRows(order);
+  const rows = allRows
+    .map((row, index) => {
+      const isLast = index === allRows.length - 1;
+      const rule = isLast
+        ? ""
+        : "border-bottom:1px solid #666666;";
+      return `
       <tr>
-        <td style="padding:6px 12px 6px 0;font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;vertical-align:top;">${escapeHtml(row.label)}</td>
-        <td style="padding:6px 0;font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(row.amount)}</td>
-      </tr>`,
-    )
+        <td style="padding:10px 12px 10px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;vertical-align:top;">${escapeHtml(row.label)}</td>
+        <td style="padding:10px 0;${rule}font-size:${row.bold ? "15px" : "14px"};font-weight:${row.bold ? "600" : "400"};color:#262626;text-align:right;white-space:nowrap;vertical-align:top;">${escapeHtml(row.amount)}</td>
+      </tr>`;
+    })
     .join("");
 
   return `
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:28px 0 8px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:32px 0 12px;">
       ${rows}
     </table>`;
 }
@@ -108,7 +113,7 @@ function brandEmailHtml(opts: {
     ? `<h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:600;color:#262626;letter-spacing:-0.02em;">${escapeHtml(opts.headline)}</h1>`
     : "";
   const legend = opts.customerFooter
-    ? `<p style="margin:16px 0 0;">You're receiving this email because you're a legend and just splashed some cash on the Futureboy website.</p>`
+    ? `<br /><br />You're receiving this email because you're a legend and just splashed some cash on the Futureboy website.`
     : "";
 
   return `<!DOCTYPE html>
@@ -124,12 +129,12 @@ function brandEmailHtml(opts: {
       <td align="center" style="padding:32px 16px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;background:#ffffff;">
           <tr>
-            <td align="center" style="padding:36px 28px 12px;">
-              <img src="${logoUrl}" width="88" alt="Futureboy" style="display:block;width:88px;height:auto;border:0;" />
+            <td align="center" style="padding:44px 36px 8px;">
+              <img src="${logoUrl}" width="62" alt="Futureboy" style="display:block;width:62px;height:auto;border:0;" />
             </td>
           </tr>
           <tr>
-            <td style="padding:16px 28px 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+            <td style="padding:28px 36px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
               ${headline}
               <div style="font-size:15px;line-height:1.55;color:#262626;">
                 ${opts.bodyHtml}
@@ -139,10 +144,8 @@ function brandEmailHtml(opts: {
             </td>
           </tr>
           <tr>
-            <td style="padding:28px 28px 36px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;color:#666666;text-align:center;">
-              <p style="margin:0 0 4px;">© Futureboy ${year}.</p>
-              <p style="margin:0;">Designed by J.</p>
-              ${legend}
+            <td style="padding:28px 36px 44px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.35;color:#666666;text-align:center;">
+              <p style="margin:0;">© Futureboy ${year}.<br />Designed by J.${legend}</p>
             </td>
           </tr>
         </table>
