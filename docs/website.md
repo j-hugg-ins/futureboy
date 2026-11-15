@@ -30,10 +30,14 @@ Build `npm run build`, publish `dist`, production branch **`master`**.
 
 Passed 2026-11-15 (Shermer £5): Checkout paid, `checkout.session.completed` webhook → Netlify 200, Resend seller email delivered. Customer confirmation added after that test (Resend to Checkout customer email).
 
+Order emails (seller + customer) use a shared HTML brand wrap: centred `futureboy-logo-light-reg.png`, large headline, borderless product/shipping/total rows, footer. Customer body switches on total quantity (1 vs 2+). Plain-text fallback included.
+
 ## Open threads
 
 - [x] Paid smoke test + Resend seller email
 - [x] Restore Shermer to £45
 - [x] Customer confirmation email
+- [x] Branded HTML order emails
 - [x] Netlify TLS for `futureboy.uk` complete
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
+- [ ] Smoke-check branded emails after deploy

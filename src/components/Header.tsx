@@ -21,14 +21,14 @@ export function Header() {
       <Link to="/" className="brand-logo" aria-label="Futureboy home">
         <img
           className="brand-logo__img brand-logo__img--on-light"
-          src="/brand/logo.png"
+          src="/brand/futureboy-logo-light-reg.svg"
           alt=""
           width={52}
           height={52}
         />
         <img
           className="brand-logo__img brand-logo__img--on-dark"
-          src="/brand/logo-on-dark.png"
+          src="/brand/futureboy-logo-dark-reg.svg"
           alt=""
           width={52}
           height={52}

@@ -15,6 +15,7 @@ times-now/
 Referenced from src/styles/fonts.css
 
 Brand marks (header):
-  public/brand/logo.png          — on light backgrounds
-  public/brand/logo-on-dark.png  — on dark backgrounds
-  public/brand/favicon.png       — tab icon (same mark as logo.png)
+  public/brand/futureboy-logo-light-reg.svg  — on light backgrounds
+  public/brand/futureboy-logo-dark-reg.svg   — on dark backgrounds
+  public/brand/favicon.png                   — tab icon
+  public/brand/futureboy-logo-light-reg.png  — email / raster fallback

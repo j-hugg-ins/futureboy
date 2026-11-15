@@ -30,17 +30,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — TLS verified on custom domain_
+_Last update: 2026-11-15 — branded order emails_
 
-**Goal:** Confirm customer order email on next live order; decide Shopify residual.
+**Goal:** Deploy branded Resend emails; confirm on next paid order or webhook resend; decide Shopify residual.
 
 **Done recently:**
-- Restored Shermer to £45; webhook now sends seller alert + customer confirmation via Resend
+- Branded HTML order emails (logo wrap, qty-based copy, borderless breakdown, footer)
+- Restored Shermer to £45; seller alert + customer confirmation via Resend
 - Paid smoke test OK (2026-11-15): £5 Shermer paid; webhook 200; seller email delivered
 - Per-product `pricePence` Checkout; `futureboy.uk` TLS + webhook live
 
 **Next steps:**
-1. Smoke-check customer confirmation on next paid order (or Stripe webhook resend)
+1. Deploy branded emails; smoke-check customer + seller on next paid order (or Stripe event resend)
 2. Decide Shopify residual (`*.myshopify.com` only vs remove)
 3. Refund £5 test payment if not already
 
