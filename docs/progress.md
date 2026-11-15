@@ -4,6 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-15 | Added gated `/api/email-preview` + shared order-email helpers | Set EMAIL_PREVIEW_SECRET on Netlify; curl smoke |
 | 2026-11-15 | Synced branded emails + logo set to master (`5ef1a5c`); Netlify ready | Stripe event resend or paid order to smoke emails |
 | 2026-11-15 | Branded Resend HTML emails: logo wrap, 1 vs 2+ copy, order table, footer | Deploy; smoke via paid order or Stripe event resend |
 | 2026-11-15 | Restored Shermer to £45; Resend customer order confirmation on webhook | Deploy; optional second smoke or Stripe event resend |

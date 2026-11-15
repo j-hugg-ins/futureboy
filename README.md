@@ -25,6 +25,14 @@ For Stripe functions locally, use Netlify’s Vite plugin (`npm run dev`) with e
 3. Set `PUBLIC_URL` to the public site origin (Netlify reserves the name `URL`). Example: `https://futureboy.netlify.app`, later `https://futureboy.uk`.
 4. Add webhook endpoint: `https://<site>/api/stripe-webhook` for `checkout.session.completed`.
 5. Set `STRIPE_WEBHOOK_SECRET`, and for emails `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM` (seller alert + customer confirmation).
+6. Optional: set `EMAIL_PREVIEW_SECRET` to smoke branded emails without a purchase:
+
+```bash
+curl -X POST "https://futureboy.uk/api/email-preview?kind=all" \
+  -H "X-Email-Preview-Secret: $EMAIL_PREVIEW_SECRET"
+```
+
+`kind` can be `one`, `two`, `seller`, or `all` (default). Mail goes only to `SALE_NOTIFY_EMAIL`, subjects prefixed with `[preview]`.
 
 Checkout charges each product’s `pricePence` and locks shipping countries to the zone chosen in the cart:
 

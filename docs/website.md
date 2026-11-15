@@ -17,8 +17,9 @@ Commerce and site stack for Future Boy.
 - Site ID `86514a25-0a64-440b-ac8c-c10cbd753b05` · dashboard https://app.netlify.com/projects/futureboy
 - Stripe account Futureboy (Standard, not Sparkinity Express)
 - Webhook event: `checkout.session.completed` → `/api/stripe-webhook`
-- Env names: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `PUBLIC_URL` (Netlify reserves `URL`), `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM`
+- Env names: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `PUBLIC_URL` (Netlify reserves `URL`), `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM`, `EMAIL_PREVIEW_SECRET`
 - Resend: domain `futureboy.uk` verified for sending
+- Preview smoke: `POST /api/email-preview?kind=all` with header `X-Email-Preview-Secret` → sample seller + ONE + TWO customer mails to `SALE_NOTIFY_EMAIL` only
 - DNS (GoDaddy via Minnow Tools): apex `A` `75.2.60.5`; `www` `CNAME` `futureboy.netlify.app`
 - Local: `npm install` && `npm run dev`. See root `README.md` / `.env.example` — never commit values.
 
@@ -40,4 +41,4 @@ Order emails (seller + customer) use a shared HTML brand wrap: centred `futurebo
 - [x] Branded HTML order emails
 - [x] Netlify TLS for `futureboy.uk` complete
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
-- [ ] Smoke-check branded emails (Stripe event resend or paid order)
+- [ ] Set `EMAIL_PREVIEW_SECRET` on Netlify + smoke `POST /api/email-preview`
