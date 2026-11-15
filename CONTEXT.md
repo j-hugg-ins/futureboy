@@ -30,18 +30,17 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — email preview smoked_
+_Last update: 2026-11-15 — email layout polish_
 
-**Goal:** Review preview mails in inbox; decide Shopify residual.
+**Goal:** Review polished preview mails; decide Shopify residual.
 
 **Done recently:**
-- `POST /api/email-preview` live + smoked (seller, ONE, TWO → `SALE_NOTIFY_EMAIL`)
-- `EMAIL_PREVIEW_SECRET` set on Netlify; shared order-email helpers with webhook
+- Email layout: ~70% logo, grey table rules, tighter footer, more padding; re-smoked preview
+- `POST /api/email-preview` live; `EMAIL_PREVIEW_SECRET` on Netlify
 - Branded HTML emails + header light/dark ® SVGs on `master`
-- Paid smoke test OK (2026-11-15): £5 Shermer; webhook 200; seller email delivered
 
 **Next steps:**
-1. Check inbox for three `[preview]` emails; tweak copy/layout if needed
+1. Check inbox for latest `[preview]` emails; further tweaks if needed
 2. Copy `EMAIL_PREVIEW_SECRET` into local `.env` from Netlify if you want local curls
 3. Decide Shopify residual (`*.myshopify.com` only vs remove)
 4. Refund £5 test payment if not already
