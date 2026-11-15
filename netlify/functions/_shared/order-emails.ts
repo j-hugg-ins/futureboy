@@ -1,3 +1,5 @@
+import { formatMinorUnits } from "./currency";
+
 export type OrderLine = {
   description: string;
   quantity: number;
@@ -6,20 +8,34 @@ export type OrderLine = {
 
 export type OrderEmailData = {
   lines: OrderLine[];
+  /** Stripe minor units in `currency` (not always GBP pence). */
   shippingPence: number | null;
   amountTotalPence: number;
+  /** ISO currency charged on the Checkout session. */
+  currency?: string;
   customerEmail?: string;
   customerName?: string;
   addressLines: string[];
   dashboardUrl?: string;
+  /** Present when paid shipping does not match address country zone. */
+  shippingMismatch?: string | null;
 };
 
 export function publicBase() {
   return (process.env.PUBLIC_URL || "https://futureboy.uk").replace(/\/$/, "");
 }
 
+export function formatOrderMoney(minor: number, currency = "gbp") {
+  return formatMinorUnits(minor, currency);
+}
+
+/** @deprecated Prefer formatOrderMoney with session currency. */
 export function formatGBP(pence: number) {
-  return `£${(pence / 100).toFixed(2)}`;
+  return formatOrderMoney(pence, "gbp");
+}
+
+function money(order: OrderEmailData, minor: number) {
+  return formatOrderMoney(minor, order.currency || "gbp");
 }
 
 export function escapeHtml(value: string) {
@@ -39,7 +55,9 @@ export function firstName(order: OrderEmailData) {
 }
 
 function shippingAmount(order: OrderEmailData) {
-  return order.shippingPence != null ? formatGBP(order.shippingPence) : "—";
+  return order.shippingPence != null
+    ? money(order, order.shippingPence)
+    : "-";
 }
 
 function orderTableRows(order: OrderEmailData) {
@@ -47,7 +65,7 @@ function orderTableRows(order: OrderEmailData) {
     const qty = line.quantity || 1;
     const label =
       qty > 1 ? `${qty}× ${line.description}` : line.description || "Item";
-    return { label, amount: formatGBP(line.amountPence || 0) };
+    return { label, amount: money(order, line.amountPence || 0) };
   });
 
   return [
@@ -55,7 +73,7 @@ function orderTableRows(order: OrderEmailData) {
     { label: "Shipping", amount: shippingAmount(order) },
     {
       label: "Total",
-      amount: formatGBP(order.amountTotalPence || 0),
+      amount: money(order, order.amountTotalPence || 0),
       bold: true,
     },
   ];
@@ -94,7 +112,7 @@ function lineSummary(order: OrderEmailData) {
     order.lines
       .map(
         (line) =>
-          `• ${line.quantity}× ${line.description} — ${formatGBP(line.amountPence || 0)}`,
+          `• ${line.quantity}× ${line.description}: ${money(order, line.amountPence || 0)}`,
       )
       .join("\n") || "• (no line items)"
   );
@@ -160,11 +178,11 @@ function brandEmailHtml(opts: {
 function customerBodyCopy(qty: number) {
   if (qty >= 2) {
     return {
-      html: `<p style="margin:0 0 16px;">Thanks so much for grabbing a few of my hats. I hope you dig them as much as I do. Futureboy is just me and my passion for caps so I really appreciate the support.</p>
+      html: `<p style="margin:0 0 16px;">Thanks so much for grabbing a few pieces. I hope you dig them as much as I do. Futureboy is just me, so I really appreciate the support.</p>
 <p style="margin:0 0 4px;">Cheers!</p>
 <p style="margin:0;">J.</p>`,
       text: [
-        "Thanks so much for grabbing a few of my hats. I hope you dig them as much as I do. Futureboy is just me and my passion for caps so I really appreciate the support.",
+        "Thanks so much for grabbing a few pieces. I hope you dig them as much as I do. Futureboy is just me, so I really appreciate the support.",
         "",
         "Cheers!",
         "",
@@ -174,11 +192,11 @@ function customerBodyCopy(qty: number) {
   }
 
   return {
-    html: `<p style="margin:0 0 16px;">Thanks so much for grabbing one of my hats. I hope you dig it as much as I do. Futureboy is just me and my passion for hats so I really appreciate the support.</p>
+    html: `<p style="margin:0 0 16px;">Thanks so much for grabbing something from the shop. I hope you dig it as much as I do. Futureboy is just me, so I really appreciate the support.</p>
 <p style="margin:0 0 4px;">Cheers!</p>
 <p style="margin:0;">J.</p>`,
     text: [
-      "Thanks so much for grabbing one of my hats. I hope you dig it as much as I do. Futureboy is just me and my passion for hats so I really appreciate the support.",
+      "Thanks so much for grabbing something from the shop. I hope you dig it as much as I do. Futureboy is just me, so I really appreciate the support.",
       "",
       "Cheers!",
       "",
@@ -205,18 +223,27 @@ export type BuiltEmail = {
 };
 
 export function buildSellerEmail(order: OrderEmailData): BuiltEmail {
-  const total = formatGBP(order.amountTotalPence || 0);
+  const total = money(order, order.amountTotalPence || 0);
   const addressBlock = order.addressLines.join("\n");
   const dashboardUrl = order.dashboardUrl || "https://dashboard.stripe.com/";
 
+  const mismatchHtml = order.shippingMismatch
+    ? `<p style="margin:0 0 12px;padding:10px 12px;background:#f8e8e4;color:#8b1e1e;">Shipping check: ${escapeHtml(order.shippingMismatch)}</p>`
+    : "";
+
   const bodyHtml = `
+      ${mismatchHtml}
       <p style="margin:0 0 12px;">New Futureboy order from ${escapeHtml(order.customerEmail || "unknown")}.</p>
       <p style="margin:0 0 4px;font-size:13px;color:#666666;">Ship to</p>
       <p style="margin:0;white-space:pre-line;">${escapeHtml(addressBlock)}</p>
       <p style="margin:20px 0 0;"><a href="${escapeHtml(dashboardUrl)}" style="color:#262626;">Open in Stripe</a></p>`;
 
+  const subject = order.shippingMismatch
+    ? `Futureboy sale: ${total} (shipping check)`
+    : `Futureboy sale: ${total}`;
+
   return {
-    subject: `Futureboy sale — ${total}`,
+    subject,
     html: brandEmailHtml({
       headline: "New order",
       bodyHtml,
@@ -225,6 +252,10 @@ export function buildSellerEmail(order: OrderEmailData): BuiltEmail {
     text: [
       "New Futureboy order",
       "",
+      order.shippingMismatch
+        ? `Shipping check: ${order.shippingMismatch}`
+        : null,
+      order.shippingMismatch ? "" : null,
       lineSummary(order),
       "",
       orderTableText(order),
@@ -232,16 +263,18 @@ export function buildSellerEmail(order: OrderEmailData): BuiltEmail {
       "Ship to:",
       ...order.addressLines,
       "",
-      `Customer: ${order.customerEmail || "—"}`,
+      `Customer: ${order.customerEmail || "-"}`,
       `Stripe Dashboard: ${dashboardUrl}`,
       "",
       footerText(false),
-    ].join("\n"),
+    ]
+      .filter((line) => line != null)
+      .join("\n"),
   };
 }
 
 export function buildCustomerEmail(order: OrderEmailData): BuiltEmail {
-  const total = formatGBP(order.amountTotalPence || 0);
+  const total = money(order, order.amountTotalPence || 0);
   const qty = totalQuantity(order);
   const name = firstName(order);
   const headline = `Everyone always got the sense that ${name} was going places…`;
@@ -253,7 +286,7 @@ export function buildCustomerEmail(order: OrderEmailData): BuiltEmail {
       <p style="margin:4px 0 0;white-space:pre-line;">${escapeHtml(addressBlock)}</p>`;
 
   return {
-    subject: `Thanks for your Futureboy order — ${total}`,
+    subject: `Thanks for your Futureboy order: ${total}`,
     html: brandEmailHtml({
       headline,
       bodyHtml: body.html,
@@ -316,6 +349,7 @@ export function sampleOrder(kind: "one" | "two"): OrderEmailData {
 
   if (kind === "two") {
     return {
+      currency: "gbp",
       lines: [
         {
           description: "Shermer Trucker",
@@ -338,6 +372,7 @@ export function sampleOrder(kind: "one" | "two"): OrderEmailData {
   }
 
   return {
+    currency: "gbp",
     lines: [
       {
         description: "Shermer Trucker",

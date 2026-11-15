@@ -4,6 +4,26 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-15 | v2.0.0; footer version + © Futureboy year; Courier Prime @ 13px | /prod then smoke non-GBP checkout |
+| 2026-11-15 | Type settled for now: Courier Prime + 13px root | Smoke non-GBP checkout; optional prune A/B fonts later |
+| 2026-11-15 | Type A/B: Quattro too narrow → Courier Prime on `--font-sans` | Kept; size bump applied |
+| 2026-11-15 | UI font trial: `--font-sans` → iA Writer Quattro (woff2 in public/fonts) | Superseded by Courier Prime trial |
+| 2026-11-15 | Shipping/product amounts remount on currency change; Frankfurter FX fallback | Smoke currency switch on shipping page |
+| 2026-11-15 | Policy/success/emails: first person; drop generic “hats” product wording | Smoke non-GBP checkout |
+| 2026-11-15 | Policy/contact copy: casual UK tone; 24h ship; drop hobby-brand line | Smoke non-GBP checkout |
+| 2026-11-15 | Shipping policy rates: horizontal-rule table (match cart/email) | Smoke non-GBP checkout |
+| 2026-11-15 | Static pages layout like About; currency switcher GBP/EUR/USD/CAD/JPY (IP default, Checkout presentment) | Smoke non-GBP checkout |
+| 2026-11-15 | Reverted header cart icon → "Cart" text | — |
+| 2026-11-15 | Geo shipping estimate; multi-rate Checkout; webhook mismatch flag | Smoke multi-rate checkout |
+| 2026-11-15 | lucide-react thin icons on cart qty ± and trash | Spot-check cart icons |
+| 2026-11-15 | Cart row: qty as column; Remove → trash icon | Spot-check cart on narrow widths |
+| 2026-11-15 | PDP thumbs: no transition; hover/active border accent | Spot-check PDP gallery |
+| 2026-11-15 | Buttons: max-content width, more inline pad, accent text/border hover | Spot-check contact/cart/PDP |
+| 2026-11-15 | `--accent: #c23a28`; link hover colour fade (dropped sliding fill) | Spot-check nav/footer/policy hover |
+| 2026-11-15 | Reverted accordion row padding to 0.95rem (dropped table-row-pad match) | Spot-check PDP accordions |
+| 2026-11-15 | PDP thumbs: instant active/hover in, 1s ease fade-out | Spot-check gallery hover |
+| 2026-11-15 | Shipping JSON + PDP Shipping accordion; first accordion = Shipping | Spot-check PDP + cart rates |
+| 2026-11-15 | Catalogue `style` + `name`; two-line titles on product cards + PDP | Pick `--accent` for link hover |
 | 2026-11-15 | Footer: disclaimer above copyright, text-wrap balance, natural breaks | Review latest [preview] mails |
 | 2026-11-15 | Email layout polish: ~70% logo, grey table rules, tighter footer, more padding | Re-smoke preview; review inbox |
 | 2026-11-15 | Preview endpoint smoked: seller + ONE + TWO to SALE_NOTIFY_EMAIL | Review inbox; optional copy tweaks |

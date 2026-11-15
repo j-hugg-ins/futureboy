@@ -1,11 +1,19 @@
 import type { Config, Context } from "@netlify/functions";
 import Stripe from "stripe";
 import {
+  convertGbpPenceToMinor,
+  formatMinorUnits,
+  getRatesFromGbp,
+  isPresentmentCurrency,
+  type PresentmentCurrency,
+} from "./_shared/currency";
+import {
   buildCustomerEmail,
   buildSellerEmail,
   type OrderEmailData,
   sendResendEmail,
 } from "./_shared/order-emails";
+import { expectedShippingPence } from "./_shared/shipping";
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -25,7 +33,49 @@ function shipToLines(full: Stripe.Checkout.Session) {
   ].filter(Boolean) as string[];
 }
 
-function orderFromSession(full: Stripe.Checkout.Session): OrderEmailData {
+async function shippingMismatchNote(
+  full: Stripe.Checkout.Session,
+): Promise<string | null> {
+  const country = full.customer_details?.address?.country;
+  if (!country) return "No shipping country on session; cannot verify rate.";
+
+  const currencyCode = (full.currency || "gbp").toLowerCase();
+  const currency: PresentmentCurrency = isPresentmentCurrency(currencyCode)
+    ? currencyCode
+    : "gbp";
+
+  const expected = expectedShippingPence(country);
+  const paid = full.shipping_cost?.amount_total ?? 0;
+
+  let expectedMinor = expected.amountPence;
+  if (currency !== "gbp") {
+    try {
+      const rates = await getRatesFromGbp();
+      expectedMinor = convertGbpPenceToMinor(
+        expected.amountPence,
+        currency,
+        rates,
+      );
+    } catch (err) {
+      console.warn("Could not convert expected shipping for mismatch check", err);
+      return `Address country ${country} expects ${expected.label}; paid shipping could not be verified in ${currency.toUpperCase()}. Review before dispatch.`;
+    }
+  }
+
+  if (paid === expectedMinor) return null;
+
+  const paidLabel = formatMinorUnits(paid, currency);
+  const expectedLabel =
+    expected.amountPence === 0
+      ? "Free"
+      : formatMinorUnits(expectedMinor, currency);
+
+  return `Address country ${country} expects ${expected.label} (${expectedLabel}) but customer paid ${paidLabel}. Review before dispatch.`;
+}
+
+async function orderFromSession(
+  full: Stripe.Checkout.Session,
+): Promise<OrderEmailData> {
   const paymentId =
     typeof full.payment_intent === "string"
       ? full.payment_intent
@@ -36,7 +86,10 @@ function orderFromSession(full: Stripe.Checkout.Session): OrderEmailData {
     ? `https://dashboard.stripe.com/${isTest ? "test/" : ""}payments/${paymentId}`
     : `https://dashboard.stripe.com/${isTest ? "test/" : ""}checkout/sessions/${full.id}`;
 
+  const currency = (full.currency || "gbp").toLowerCase();
+
   return {
+    currency,
     lines:
       full.line_items?.data.map((li) => ({
         description: li.description || "Item",
@@ -51,6 +104,7 @@ function orderFromSession(full: Stripe.Checkout.Session): OrderEmailData {
     customerName: full.customer_details?.name || undefined,
     addressLines: shipToLines(full),
     dashboardUrl,
+    shippingMismatch: await shippingMismatchNote(full),
   };
 }
 
@@ -69,7 +123,11 @@ async function sendOrderEmails(session: Stripe.Checkout.Session) {
   const full = await stripe.checkout.sessions.retrieve(session.id, {
     expand: ["line_items", "payment_intent"],
   });
-  const order = orderFromSession(full);
+  const order = await orderFromSession(full);
+
+  if (order.shippingMismatch) {
+    console.warn("Shipping mismatch", order.shippingMismatch);
+  }
 
   if (sellerTo) {
     const seller = buildSellerEmail(order);

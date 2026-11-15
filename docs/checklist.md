@@ -20,6 +20,10 @@
 
 ## Main tasks
 
+- [x] Product title split: `style` + `name` on cards and PDP (two lines)
+- [x] Shipping rates in `src/data/shipping.json`; PDP Shipping accordion (top)
+- [x] Cart geo estimate; Checkout all rates; webhook shipping mismatch check
+- [x] Link hover → plain colour to `--accent` (`#c23a28`)
 - [x] Deploy per-product pricing fix to `master`
 - [x] Smoke-test paid checkout + sale email on https://futureboy.uk (Shermer £5)
 - [x] Restore Shermer `pricePence` to 4500
@@ -29,6 +33,11 @@
 - [x] Set `EMAIL_PREVIEW_SECRET` on Netlify and smoke preview endpoint
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)
+- [x] Footer/static pages: About-style centred left-aligned layout; no em dashes
+- [x] Presentment currency switcher (GBP/EUR/USD/CAD/JPY); IP default; Stripe Checkout in selected currency
+- [x] Type: Courier Prime on `--font-sans`; root 13px (sticking for now; unused A/B fonts optional prune later)
+- [x] Version 2.0.0 in package.json; footer shows version left of © Futureboy year
+- [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
 - [ ] Act on home print kit / first tee experiments (Development)

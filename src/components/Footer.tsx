@@ -26,7 +26,9 @@ export function Footer() {
             </Link>
           </li>
         </ul>
-        <p className="footer-copy">© {new Date().getFullYear()} Futureboy</p>
+        <p className="footer-copy">
+          {__APP_VERSION__} © Futureboy {new Date().getFullYear()}
+        </p>
       </div>
     </footer>
   );

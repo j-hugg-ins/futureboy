@@ -1,23 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
 import { getProduct } from "../lib/products";
-import { SHIPPING, formatGBP, type ShippingZone } from "../lib/types";
+
+const iconStroke = 1.5;
+
+type ShippingEstimate = {
+  country: string | null;
+  zone: string | null;
+  label: string | null;
+  amountPence: number | null;
+};
 
 export function CartPage() {
-  const {
-    items,
-    shippingZone,
-    setShippingZone,
-    setQuantity,
-    removeItem,
-    subtotalPence,
-  } = useCart();
+  const { items, setQuantity, removeItem, subtotalPence } = useCart();
+  const { currency, formatMoney } = useCurrency();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [estimate, setEstimate] = useState<ShippingEstimate | null>(null);
 
-  const shipping = SHIPPING[shippingZone];
-  const total = subtotalPence + shipping.amountPence;
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/shipping-estimate")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: ShippingEstimate | null) => {
+        if (!cancelled) setEstimate(data);
+      })
+      .catch(() => {
+        if (!cancelled) setEstimate(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const hasEstimate =
+    estimate != null &&
+    estimate.amountPence != null &&
+    Number.isFinite(estimate.amountPence);
+
+  const shippingPence = hasEstimate ? (estimate.amountPence as number) : null;
+  const total =
+    shippingPence != null ? subtotalPence + shippingPence : subtotalPence;
 
   async function checkout() {
     setLoading(true);
@@ -27,8 +53,8 @@ export function CartPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          currency,
           items: items.map((i) => ({ handle: i.handle, quantity: i.quantity })),
-          shippingZone,
         }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
@@ -52,6 +78,12 @@ export function CartPage() {
     );
   }
 
+  const shippingAmount = hasEstimate
+    ? shippingPence === 0
+      ? "Free"
+      : formatMoney(shippingPence as number)
+    : "TBC";
+
   return (
     <div className="container cart-page">
       <h1>Cart</h1>
@@ -68,81 +100,72 @@ export function CartPage() {
                 <h2>
                   <Link to={`/product/${product.handle}`}>{product.title}</Link>
                 </h2>
-                <p className="cart-row__price">{formatGBP(product.pricePence)}</p>
-                <div className="qty">
-                  <button
-                    type="button"
-                    className="btn"
-                    aria-label="Decrease quantity"
-                    onClick={() => setQuantity(item.handle, item.quantity - 1)}
-                  >
-                    −
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    type="button"
-                    className="btn"
-                    aria-label="Increase quantity"
-                    onClick={() => setQuantity(item.handle, item.quantity + 1)}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    className="btn"
-                    onClick={() => removeItem(item.handle)}
-                  >
-                    Remove
-                  </button>
-                </div>
+                <p className="cart-row__price">
+                  {formatMoney(product.pricePence)}
+                </p>
+              </div>
+              <div className="qty">
+                <button
+                  type="button"
+                  className="btn btn--icon"
+                  aria-label="Decrease quantity"
+                  onClick={() => setQuantity(item.handle, item.quantity - 1)}
+                >
+                  <Minus size={14} strokeWidth={iconStroke} aria-hidden />
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  type="button"
+                  className="btn btn--icon"
+                  aria-label="Increase quantity"
+                  onClick={() => setQuantity(item.handle, item.quantity + 1)}
+                >
+                  <Plus size={14} strokeWidth={iconStroke} aria-hidden />
+                </button>
               </div>
               <p className="cart-row__line">
-                {formatGBP(product.pricePence * item.quantity)}
+                {formatMoney(product.pricePence * item.quantity)}
               </p>
+              <button
+                type="button"
+                className="btn btn--icon"
+                aria-label="Remove from cart"
+                onClick={() => removeItem(item.handle)}
+              >
+                <Trash2 size={14} strokeWidth={iconStroke} aria-hidden />
+              </button>
             </li>
           );
         })}
       </ul>
 
       <div className="cart-summary">
-        <p className="cart-summary__label">Shipping destination</p>
-        <div
-          className="shipping-options"
-          role="radiogroup"
-          aria-label="Shipping zone"
-        >
-          {(Object.keys(SHIPPING) as ShippingZone[]).map((zone) => (
-            <label key={zone} className="shipping-option">
-              <span>
-                <input
-                  type="radio"
-                  name="shipping"
-                  checked={shippingZone === zone}
-                  onChange={() => setShippingZone(zone)}
-                />
-                {SHIPPING[zone].label}
-              </span>
-              <span>
-                {SHIPPING[zone].amountPence === 0
-                  ? "Free"
-                  : formatGBP(SHIPPING[zone].amountPence)}
-              </span>
-            </label>
-          ))}
-        </div>
-
         <dl className="cart-totals">
           <dt>Subtotal</dt>
-          <dd>{formatGBP(subtotalPence)}</dd>
+          <dd>{formatMoney(subtotalPence)}</dd>
           <dt>Shipping</dt>
           <dd>
-            {shipping.amountPence === 0
-              ? "Free"
-              : formatGBP(shipping.amountPence)}
+            {shippingAmount}
+            <a
+              href="#shipping-note"
+              className="cart-shipping-asterisk"
+              aria-label="Shipping estimate note"
+            >
+              *
+            </a>
           </dd>
           <dt>Total</dt>
-          <dd>{formatGBP(total)}</dd>
+          <dd>
+            {hasEstimate ? formatMoney(total) : formatMoney(subtotalPence)}
+          </dd>
         </dl>
+
+        <p id="shipping-note" className="cart-shipping-note">
+          *{" "}
+          {hasEstimate && estimate?.label
+            ? `Estimate for your location (${estimate.label}). Exact rate confirms at checkout with your address.`
+            : "Estimate where we can. Exact rate confirms at checkout with your address."}
+        </p>
 
         <button
           type="button"
@@ -150,7 +173,7 @@ export function CartPage() {
           disabled={loading}
           onClick={checkout}
         >
-          {loading ? "Redirecting…" : "Checkout with Stripe"}
+          {loading ? "Redirecting…" : "Checkout"}
         </button>
         {error ? <p className="error">{error}</p> : null}
       </div>

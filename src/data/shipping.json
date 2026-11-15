@@ -1,0 +1,17 @@
+{
+  "uk": {
+    "id": "uk",
+    "label": "United Kingdom",
+    "amountPence": 0
+  },
+  "europe": {
+    "id": "europe",
+    "label": "Europe",
+    "amountPence": 1000
+  },
+  "row": {
+    "id": "row",
+    "label": "Rest of world",
+    "amountPence": 2000
+  }
+}

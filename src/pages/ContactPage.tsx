@@ -31,45 +31,51 @@ export function ContactPage() {
   }
 
   return (
-    <div className="container contact-page">
-      <h1>Contact</h1>
-      {status === "sent" ? (
-        <p>Thanks — message received. I’ll get back to you.</p>
-      ) : (
-        <form
-          className="form"
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          onSubmit={onSubmit}
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <p className="sr-only">
-            <label>
-              Don’t fill this out: <input name="bot-field" />
-            </label>
+    <div className="static-page">
+      <div className="static-page__inner">
+        <h1 className="static-page__title">Contact</h1>
+        {status === "sent" ? (
+          <p className="static-page__copy">
+            Thanks, got it. I will get back to you soon.
           </p>
-          <label>
-            Name
-            <input name="name" type="text" required autoComplete="name" />
-          </label>
-          <label>
-            Email
-            <input name="email" type="email" required autoComplete="email" />
-          </label>
-          <label>
-            Message
-            <textarea name="message" required />
-          </label>
-          <button className="btn" type="submit" disabled={status === "sending"}>
-            {status === "sending" ? "Sending…" : "Send"}
-          </button>
-          {status === "error" ? (
-            <p className="error">Something went wrong. Try again or email directly.</p>
-          ) : null}
-        </form>
-      )}
+        ) : (
+          <form
+            className="form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={onSubmit}
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="sr-only">
+              <label>
+                Do not fill this out: <input name="bot-field" />
+              </label>
+            </p>
+            <label>
+              Name
+              <input name="name" type="text" required autoComplete="name" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required autoComplete="email" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" required />
+            </label>
+            <button className="btn" type="submit" disabled={status === "sending"}>
+              {status === "sending" ? "Sending…" : "Send"}
+            </button>
+            {status === "error" ? (
+              <p className="error">
+                Something went wrong. Try again or email directly.
+              </p>
+            ) : null}
+          </form>
+        )}
+      </div>
     </div>
   );
 }

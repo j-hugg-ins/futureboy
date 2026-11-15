@@ -2,6 +2,8 @@
   {
     "id": "8117429338334",
     "handle": "murphy-trucker-cap",
+    "style": "Murphy",
+    "name": "Trucker Cap",
     "title": "Murphy Trucker Cap",
     "subtitle": "Pine Green & Yellow",
     "sku": "fb-hat-008-green",
@@ -49,6 +51,8 @@
   {
     "id": "8117425635550",
     "handle": "shermer-trucker-cap",
+    "style": "Shermer",
+    "name": "Trucker Cap",
     "title": "Shermer Trucker Cap",
     "subtitle": "Red & Gold",
     "sku": "fb-hat-007-red",
@@ -96,6 +100,8 @@
   {
     "id": "7971827450078",
     "handle": "striker-trucker-cap",
+    "style": "Striker",
+    "name": "Trucker Cap",
     "title": "Striker Trucker Cap",
     "subtitle": "Indigo Denim",
     "sku": "fb-hat-006-indigo",
@@ -143,6 +149,8 @@
   {
     "id": "7971759489246",
     "handle": "tyrell-trucker-cap",
+    "style": "Tyrell",
+    "name": "Trucker Cap",
     "title": "Tyrell Trucker Cap",
     "subtitle": "Grey Corduroy",
     "sku": "fb-hat-005-grey",
@@ -190,6 +198,8 @@
   {
     "id": "7971752706270",
     "handle": "miyagi-trucker-cap",
+    "style": "Miyagi",
+    "name": "Trucker Cap",
     "title": "Miyagi Trucker Cap",
     "subtitle": "Black & Orange",
     "sku": "fb-hat-004-black",
@@ -237,6 +247,8 @@
   {
     "id": "7695951397086",
     "handle": "trucker-hat-burgundy",
+    "style": "Porkchop",
+    "name": "Trucker Cap",
     "title": "Porkchop Trucker Cap — Burgundy",
     "subtitle": "Burgundy & Gold",
     "sku": "fb-hat-001-burgundy",
@@ -284,6 +296,8 @@
   {
     "id": "7695941173470",
     "handle": "trucker-hat-navy",
+    "style": "Porkchop",
+    "name": "Trucker Cap",
     "title": "Porkchop Trucker Cap — Navy",
     "subtitle": "Navy & Gold",
     "sku": "fb-hat-001-navy",
@@ -331,6 +345,8 @@
   {
     "id": "7695940354270",
     "handle": "trucker-hat",
+    "style": "Porkchop",
+    "name": "Trucker Cap",
     "title": "Porkchop Trucker Cap — Black",
     "subtitle": "Black & Gold",
     "sku": "fb-hat-001-black",

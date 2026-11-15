@@ -1,16 +1,13 @@
-Fonts loaded from Shopify CDN (licensed copies you already use on futureboy.uk).
+Active UI face (via `--font-sans` in `src/styles/global.css`):
 
-neue-montreal/
-  NeueMontreal-Regular.woff
-  NeueMontreal-Italic.woff
-  NeueMontreal-Bold.woff
-  NeueMontreal-BoldItalic.woff
+courier-prime/  — Courier Prime (OFL; latin woff2 from Fontsource)
+  courier-prime-latin-400-normal.woff2 (+ italic / 700)
 
-times-now/
-  TimesNow-Light.woff
-  TimesNow-LightItalic.woff
-  TimesNow-Bold.woff
-  TimesNow-BoldItalic.woff
+Also on disk for A/B:
+
+ia-writer-quattro/  — previous trial
+geist/ · geist-mono/
+neue-montreal/ · times-now/  — older Shopify CDN copies
 
 Referenced from src/styles/fonts.css
 

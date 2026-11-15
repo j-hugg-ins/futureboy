@@ -2,10 +2,12 @@ import type { Config, Context } from "@netlify/functions";
 import Stripe from "stripe";
 import products from "../../src/data/products.json";
 import {
-  EUROPE_COUNTRIES,
-  ROW_COUNTRIES,
-  type ShippingZone,
-} from "./_shared/shipping";
+  convertGbpPenceToMinor,
+  getRatesFromGbp,
+  parsePresentmentCurrency,
+  type PresentmentCurrency,
+} from "./_shared/currency";
+import { allAllowedCountries, allShippingOptions } from "./_shared/shipping";
 
 type BasketLine = { handle: string; quantity: number };
 
@@ -25,28 +27,6 @@ function getStripe() {
   return new Stripe(key);
 }
 
-function shippingFor(zone: ShippingZone) {
-  if (zone === "uk") {
-    return {
-      label: "UK shipping",
-      amount: 0,
-      countries: ["GB"],
-    };
-  }
-  if (zone === "europe") {
-    return {
-      label: "Europe shipping",
-      amount: 1000,
-      countries: [...EUROPE_COUNTRIES],
-    };
-  }
-  return {
-    label: "International shipping",
-    amount: 2000,
-    countries: [...ROW_COUNTRIES],
-  };
-}
-
 export default async (req: Request, _context: Context) => {
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -58,19 +38,18 @@ export default async (req: Request, _context: Context) => {
   try {
     const body = (await req.json()) as {
       items?: BasketLine[];
-      shippingZone?: ShippingZone;
+      currency?: string;
     };
 
-    const zone = body.shippingZone;
-    if (zone !== "uk" && zone !== "europe" && zone !== "row") {
-      return Response.json({ error: "Invalid shipping zone" }, { status: 400 });
-    }
+    const currency: PresentmentCurrency =
+      parsePresentmentCurrency(body.currency) ?? "gbp";
 
     const items = body.items ?? [];
     if (!items.length) {
       return Response.json({ error: "Cart is empty" }, { status: 400 });
     }
 
+    const ratesFromGbp = await getRatesFromGbp({ forceRefresh: true });
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
     for (const line of items) {
@@ -87,8 +66,8 @@ export default async (req: Request, _context: Context) => {
           { status: 400 },
         );
       }
-      const unitAmount = Math.floor(Number(product.pricePence));
-      if (!Number.isFinite(unitAmount) || unitAmount < 1) {
+      const unitGbp = Math.floor(Number(product.pricePence));
+      if (!Number.isFinite(unitGbp) || unitGbp < 1) {
         return Response.json(
           { error: `Invalid price for ${product.title}` },
           { status: 400 },
@@ -99,10 +78,18 @@ export default async (req: Request, _context: Context) => {
         return Response.json({ error: "Invalid quantity" }, { status: 400 });
       }
 
+      const unitAmount = convertGbpPenceToMinor(unitGbp, currency, ratesFromGbp);
+      if (!Number.isFinite(unitAmount) || unitAmount < 1) {
+        return Response.json(
+          { error: `Converted price too low for ${product.title}` },
+          { status: 400 },
+        );
+      }
+
       line_items.push({
         quantity: qty,
         price_data: {
-          currency: "gbp",
+          currency,
           unit_amount: unitAmount,
           product_data: {
             name: product.title,
@@ -116,8 +103,22 @@ export default async (req: Request, _context: Context) => {
       });
     }
 
-    const ship = shippingFor(zone);
     const origin = siteOrigin();
+    const countries = allAllowedCountries();
+    const shipping_options = allShippingOptions().map((ship) => {
+      const amount = convertGbpPenceToMinor(
+        ship.amount,
+        currency,
+        ratesFromGbp,
+      );
+      return {
+        shipping_rate_data: {
+          type: "fixed_amount" as const,
+          fixed_amount: { amount, currency },
+          display_name: ship.label,
+        },
+      };
+    });
 
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
@@ -126,19 +127,13 @@ export default async (req: Request, _context: Context) => {
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cart`,
       shipping_address_collection: {
-        allowed_countries: ship.countries as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
+        allowed_countries:
+          countries as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
       },
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            type: "fixed_amount",
-            fixed_amount: { amount: ship.amount, currency: "gbp" },
-            display_name: ship.label,
-          },
-        },
-      ],
+      shipping_options,
       metadata: {
-        shippingZone: zone,
+        presentment_currency: currency,
+        catalogue_base: "gbp",
       },
     });
 

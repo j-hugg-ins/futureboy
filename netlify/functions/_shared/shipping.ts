@@ -1,3 +1,5 @@
+import shippingRates from "../../../src/data/shipping.json";
+
 export type ShippingZone = "uk" | "europe" | "row";
 
 export const EUROPE_COUNTRIES = [
@@ -133,3 +135,43 @@ export const ROW_COUNTRIES = [
   "TO",
   "VU",
 ] as const;
+
+const EUROPE_SET = new Set<string>(EUROPE_COUNTRIES);
+
+export function zoneFromCountry(
+  country: string | null | undefined,
+): ShippingZone {
+  const code = (country || "").trim().toUpperCase();
+  if (code === "GB") return "uk";
+  if (EUROPE_SET.has(code)) return "europe";
+  return "row";
+}
+
+export function rateForZone(zone: ShippingZone) {
+  return shippingRates[zone];
+}
+
+export function expectedShippingPence(country: string | null | undefined) {
+  const zone = zoneFromCountry(country);
+  return {
+    zone,
+    amountPence: shippingRates[zone].amountPence,
+    label: shippingRates[zone].label,
+  };
+}
+
+/** Deduped Stripe allowed-country list for all zones. */
+export function allAllowedCountries(): string[] {
+  return [...new Set(["GB", ...EUROPE_COUNTRIES, ...ROW_COUNTRIES])];
+}
+
+export function allShippingOptions() {
+  return (Object.keys(shippingRates) as ShippingZone[]).map((zone) => {
+    const rate = shippingRates[zone];
+    return {
+      zone,
+      label: `${rate.label} shipping`,
+      amount: rate.amountPence,
+    };
+  });
+}

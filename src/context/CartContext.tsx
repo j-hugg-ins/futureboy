@@ -7,15 +7,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { CartItem, ShippingZone } from "../lib/types";
+import type { CartItem } from "../lib/types";
 import { getProduct } from "../lib/products";
 
 const STORAGE_KEY = "futureboy-cart";
 
 type CartContextValue = {
   items: CartItem[];
-  shippingZone: ShippingZone;
-  setShippingZone: (zone: ShippingZone) => void;
   addItem: (handle: string, qty?: number) => void;
   removeItem: (handle: string) => void;
   setQuantity: (handle: string, quantity: number) => void;
@@ -39,7 +37,6 @@ function loadCart(): CartItem[] {
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
-  const [shippingZone, setShippingZone] = useState<ShippingZone>("uk");
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -99,8 +96,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       items,
-      shippingZone,
-      setShippingZone,
       addItem,
       removeItem,
       setQuantity,
@@ -108,16 +103,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       itemCount,
       subtotalPence,
     }),
-    [
-      items,
-      shippingZone,
-      addItem,
-      removeItem,
-      setQuantity,
-      clear,
-      itemCount,
-      subtotalPence,
-    ],
+    [items, addItem, removeItem, setQuantity, clear, itemCount, subtotalPence],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

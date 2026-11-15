@@ -1,108 +1,131 @@
 import type { ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
-
-const policies: Record<string, { title: string; body: ReactNode }> = {
-  shipping: {
-    title: "Shipping policy",
-    body: (
-      <>
-        <p>
-          Hats ship from the UK. Choose your shipping zone at checkout — the
-          destination countries for that zone are locked in Stripe Checkout so
-          the rate matches the address.
-        </p>
-        <h2>Rates</h2>
-        <ul>
-          <li>
-            <strong>United Kingdom</strong> — free
-          </li>
-          <li>
-            <strong>Europe</strong> — £10
-          </li>
-          <li>
-            <strong>Rest of world</strong> — £20
-          </li>
-        </ul>
-        <p>
-          Dispatch times vary with how busy I am (this is a small hobby brand).
-          You’ll get tracking when it’s available.
-        </p>
-      </>
-    ),
-  },
-  refund: {
-    title: "Refund policy",
-    body: (
-      <>
-        <p>
-          If something arrives damaged or wrong, get in touch via the{" "}
-          <Link to="/contact">contact form</Link> with photos and I’ll sort a
-          replacement or refund.
-        </p>
-        <p>
-          Because hats are worn close to the head, unworn items in original
-          condition may be returnable within 14 days of delivery — email first
-          before sending anything back.
-        </p>
-      </>
-    ),
-  },
-  privacy: {
-    title: "Privacy policy",
-    body: (
-      <>
-        <p>
-          Futureboy collects the minimum needed to run the shop: contact form
-          messages (via Netlify Forms) and order/payment details processed by
-          Stripe.
-        </p>
-        <p>
-          We don’t sell your data. Payment card details never touch our servers
-          — they’re handled by Stripe Checkout.
-        </p>
-        <p>
-          For questions about your data, use the{" "}
-          <Link to="/contact">contact form</Link>.
-        </p>
-      </>
-    ),
-  },
-  terms: {
-    title: "Terms of service",
-    body: (
-      <>
-        <p>
-          By buying from Futureboy you agree that products are described in good
-          faith, prices are in GBP, and shipping rates are as listed at
-          checkout.
-        </p>
-        <p>
-          Colours may vary slightly from photos depending on your screen.
-          Availability can change; sold-out items stay listed but can’t be
-          purchased until restocked.
-        </p>
-      </>
-    ),
-  },
-};
+import { useCurrency } from "../context/CurrencyContext";
+import { SHIPPING, type ShippingZone } from "../lib/types";
 
 export function PolicyPage() {
   const { slug = "" } = useParams();
+  const { currency, formatMoney } = useCurrency();
+
+  const shippingRatesTable = (
+    <table className="rates-table" key={currency}>
+      <tbody>
+        {(Object.keys(SHIPPING) as ShippingZone[]).map((zone) => {
+          const { label, amountPence } = SHIPPING[zone];
+          return (
+            <tr key={`${zone}-${currency}`}>
+              <td>{label}</td>
+              <td>
+                {amountPence === 0 ? "Free" : formatMoney(amountPence)}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+
+  const policies: Record<string, { title: string; body: ReactNode }> = {
+    shipping: {
+      title: "Shipping",
+      body: (
+        <>
+          <p>
+            I ship everything from the UK. I usually get orders out within 24
+            hours, and I will send tracking when I have it.
+          </p>
+          <p>
+            Your cart may show an estimate based on where you are. I lock in the
+            exact rate at checkout once your address is set. The rates below
+            follow the currency you have selected (I set shop prices in GBP).
+          </p>
+          <h2>Rates</h2>
+          {shippingRatesTable}
+          <p>
+            Amounts are estimates at current exchange rates. The exact value is
+            calculated at checkout.
+          </p>
+        </>
+      ),
+    },
+    refund: {
+      title: "Refunds",
+      body: (
+        <>
+          <p>
+            If something arrives damaged or wrong, drop me a line via the{" "}
+            <Link to="/contact">contact form</Link> with a couple of photos and
+            I will sort a replacement or refund.
+          </p>
+          <p>
+            I take returns on unworn items in original condition within 14 days
+            of delivery. Please message me first before posting anything back.
+          </p>
+        </>
+      ),
+    },
+    privacy: {
+      title: "Privacy",
+      body: (
+        <>
+          <p>
+            I only keep what I need to run the shop: messages you send through
+            the contact form, and the order details Stripe needs to take
+            payment.
+          </p>
+          <p>
+            I do not sell your data. Your card details never touch my servers;
+            Stripe handles checkout.
+          </p>
+          <p>
+            Questions about your data? Use the{" "}
+            <Link to="/contact">contact form</Link> and I will help.
+          </p>
+        </>
+      ),
+    },
+    terms: {
+      title: "Terms",
+      body: (
+        <>
+          <p>
+            When you order from me, you are buying as described on the site. I
+            set prices in GBP. You can browse and pay in GBP, EUR, USD, CAD, or
+            JPY with the currency switcher; checkout charges the converted total
+            in the currency you pick. Shipping is whatever rate applies to your
+            address at checkout.
+          </p>
+          <p>
+            Colours can look a bit different depending on your screen. Stock
+            moves; if something is sold out I leave it listed but you cannot buy
+            it until it is back.
+          </p>
+        </>
+      ),
+    },
+  };
+
   const policy = policies[slug];
 
   if (!policy) {
     return (
-      <div className="container policy-page">
-        <h1>Not found</h1>
-        <Link to="/">Home</Link>
+      <div className="static-page">
+        <div className="static-page__inner">
+          <h1 className="static-page__title">Not found</h1>
+          <p className="static-page__copy">
+            <Link to="/">Home</Link>
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container policy-page">
-      <h1>{policy.title}</h1>
-      <div className="prose">{policy.body}</div>
+    <div className="static-page">
+      <div className="static-page__inner">
+        <h1 className="static-page__title">{policy.title}</h1>
+        <div className="static-page__prose">{policy.body}</div>
+      </div>
     </div>
   );
 }

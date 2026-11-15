@@ -30,20 +30,17 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — email layout polish_
+_Last update: 2026-11-15 — v2.0.0 footer + /prod_
 
-**Goal:** Review polished preview mails; decide Shopify residual.
+**Goal:** Production ship of currency + type + footer version; then smoke non-GBP.
 
 **Done recently:**
-- Email layout: ~70% logo, grey table rules, tighter footer, more padding; re-smoked preview
-- `POST /api/email-preview` live; `EMAIL_PREVIEW_SECRET` on Netlify
-- Branded HTML emails + header light/dark ® SVGs on `master`
-
+- `package.json` → 2.0.0; footer `2.0.0 © Futureboy {year}` from Vite `__APP_VERSION__`
+- Type: Courier Prime @ 13px; multi-currency Checkout presentment
 **Next steps:**
-1. Check inbox for latest `[preview]` emails; further tweaks if needed
-2. Copy `EMAIL_PREVIEW_SECRET` into local `.env` from Netlify if you want local curls
-3. Decide Shopify residual (`*.myshopify.com` only vs remove)
-4. Refund £5 test payment if not already
+1. Smoke non-GBP checkout (EUR or USD) + confirm email totals
+2. Decide Shopify residual (`*.myshopify.com` only vs remove)
+3. Optional later: prune unused A/B font folders (Geist / Quattro)
 
 **Blockers / landmines:**
 - Do not use Sparkinity Express Stripe for this shop

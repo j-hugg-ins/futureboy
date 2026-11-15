@@ -2,22 +2,28 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductCard } from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
 import { getProduct, relatedProducts } from "../lib/products";
-import { formatGBP } from "../lib/types";
+import { shippingAccordion } from "../lib/types";
 
 export function ProductPage() {
   const { handle = "" } = useParams();
   const product = getProduct(handle);
   const { addItem } = useCart();
+  const { currency, formatMoney } = useCurrency();
   const [active, setActive] = useState(0);
   const [added, setAdded] = useState(false);
   const related = useMemo(() => relatedProducts(handle), [handle]);
+  const shipping = useMemo(
+    () => shippingAccordion(formatMoney, currency),
+    [formatMoney, currency],
+  );
 
   if (!product) {
     return (
       <div className="container cart-page">
         <h1>Not found</h1>
-        <p className="empty">That hat isn’t here.</p>
+        <p className="empty">That piece isn’t here.</p>
         <Link to="/shop">Back to shop</Link>
       </div>
     );
@@ -50,29 +56,35 @@ export function ProductPage() {
         <div className="pdp-info">
           <div className="pdp-buy">
             <div className="pdp-meta">
-              <h1>{product.title}</h1>
-              <p className="pdp-price">{formatGBP(product.pricePence)}</p>
+              <h1 className="pdp-title">
+                <span className="pdp-title__style">{product.style}</span>
+                <span className="pdp-title__name">{product.name}</span>
+              </h1>
+              <p className="pdp-price">{formatMoney(product.pricePence)}</p>
             </div>
 
-            <button
-              type="button"
-              className="btn"
-              disabled={!product.available}
-              onClick={() => {
-                addItem(product.handle);
-                setAdded(true);
-              }}
-            >
-              {!product.available ? "Sold out" : added ? "Added to cart" : "Add to cart"}
-            </button>
-
-            <p className="pdp-note">Shipping calculated at checkout by destination.</p>
+            {product.available ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  addItem(product.handle);
+                  setAdded(true);
+                }}
+              >
+                {added ? "Added to cart" : "Add to cart"}
+              </button>
+            ) : (
+              <span className="sold-out-badge sold-out-badge--inline">
+                Sold out
+              </span>
+            )}
           </div>
 
           <p className="pdp-desc">{product.description}</p>
 
           <div className="accordion">
-            {product.accordions.map((item) => (
+            {[shipping, ...product.accordions].map((item) => (
               <details key={item.id} className="accordion-item">
                 <summary>
                   <span>{item.title}</span>

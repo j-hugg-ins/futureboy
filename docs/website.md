@@ -16,7 +16,10 @@ Commerce and site stack for Future Boy.
 
 - Site ID `86514a25-0a64-440b-ac8c-c10cbd753b05` · dashboard https://app.netlify.com/projects/futureboy
 - Stripe account Futureboy (Standard, not Sparkinity Express)
-- Webhook event: `checkout.session.completed` → `/api/stripe-webhook`
+- Webhook event: `checkout.session.completed` → `/api/stripe-webhook` (seller email flags shipping rate vs address country mismatch)
+- Cart shipping: `/api/shipping-estimate` uses Netlify geo; final rate chosen in Stripe Checkout from address
+- Presentment currency: header switcher (GBP / EUR / USD / CAD / JPY); IP default via `/api/currency-rates` + Netlify geo; override in `localStorage`. Catalogue stays GBP in JSON; Checkout `price_data` and shipping options convert via Stripe Exchange Rates so display and charge match. JPY is zero-decimal.
+- Checkout: all UK / Europe / ROW rates offered; allowed countries = union of zones
 - Env names: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `PUBLIC_URL` (Netlify reserves `URL`), `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM`, `EMAIL_PREVIEW_SECRET`
 - Resend: domain `futureboy.uk` verified for sending
 - Preview smoke: `POST /api/email-preview?kind=all` with header `X-Email-Preview-Secret` → sample seller + ONE + TWO customer mails to `SALE_NOTIFY_EMAIL` only

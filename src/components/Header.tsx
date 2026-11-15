@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import {
+  currencyLabel,
+  useCurrency,
+} from "../context/CurrencyContext";
+import type { PresentmentCurrency } from "../lib/currency";
 
 export function Header() {
   const { itemCount } = useCart();
+  const { currency, setCurrency, currencies } = useCurrency();
 
   return (
     <header className="site-header site-header--solid">
       <nav className="nav-left" aria-label="Primary">
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
         <a
           href="https://www.instagram.com/futureboy.uk"
           target="_blank"
@@ -14,8 +22,6 @@ export function Header() {
         >
           Instagram
         </a>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
       </nav>
 
       <Link to="/" className="brand-logo" aria-label="Futureboy home">
@@ -36,13 +42,29 @@ export function Header() {
       </Link>
 
       <div className="nav-right">
+        <label className="currency-switcher">
+          <span className="sr-only">Currency</span>
+          <select
+            value={currency}
+            aria-label="Currency"
+            onChange={(e) =>
+              setCurrency(e.target.value as PresentmentCurrency)
+            }
+          >
+            {currencies.map((code) => (
+              <option key={code} value={code}>
+                {currencyLabel(code)}
+              </option>
+            ))}
+          </select>
+        </label>
         <Link
           to="/cart"
           className="cart-link"
           aria-label={itemCount > 0 ? `Cart, ${itemCount} items` : "Cart"}
         >
           Cart
-          {itemCount > 0 ? <span className="cart-count">({itemCount})</span> : null}
+          {itemCount > 0 ? <span className="cart-count">[{itemCount}]</span> : null}
         </Link>
       </div>
     </header>

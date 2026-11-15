@@ -2,6 +2,8 @@
 
 Runs, SKUs, and catalogue notes. Code catalogue for the Vite scaffold lives in `src/data/products.json` (images under `public/products/`).
 
+Display fields: `style` (Murphy, Shermer, Porkchop, …) and `name` (`Trucker Cap`) render on two lines on cards and PDP. URL slug stays `handle`; Stripe/emails still use full `title`.
+
 ## Stance
 
 - Low product count; limited runs
@@ -18,11 +20,13 @@ Runs, SKUs, and catalogue notes. Code catalogue for the Vite scaffold lives in `
 
 Per-product `pricePence` in `src/data/products.json` is the source of truth for display and Stripe Checkout. Most hats are currently `4500` (£45).
 
-## Shipping zones (scaffold)
+## Shipping zones
+
+Source of truth: `src/data/shipping.json` (cart geo estimate, PDP accordion, Stripe Checkout rates, policy page). Final rate set at Checkout from address.
 
 | Zone | Rate |
 |------|------|
-| UK | Free |
+| United Kingdom | Free |
 | Europe | £10 |
 | Rest of world | £20 |
 

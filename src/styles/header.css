@@ -43,8 +43,8 @@
 
 .brand-logo {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   display: grid;
   place-items: center;
 }
@@ -68,6 +68,43 @@
   display: block;
 }
 
+.currency-switcher {
+  display: inline-flex;
+  align-items: center;
+}
+
+.currency-switcher select {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition: color 0.35s var(--ease);
+}
+
+.currency-switcher select:hover,
+.currency-switcher select:focus,
+.currency-switcher select:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border: 0;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .currency-switcher select {
+    transition: none;
+  }
+}
+
 .cart-link {
   display: inline-flex;
   align-items: center;
@@ -81,7 +118,7 @@
 
 @media (max-width: 640px) {
   .brand-logo {
-    width: 44px;
-    height: 44px;
+    width: 51px;
+    height: 51px;
   }
 }

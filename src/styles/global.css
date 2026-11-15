@@ -3,21 +3,22 @@
   --ink: #262626;
   --ink-soft: rgba(38, 38, 38, 0.75);
   --ink-faint: rgba(38, 38, 38, 0.45);
+  --accent: #c23a28;
   --paper: #f5f5f5;
   --line: var(--ink);
   --btn: #e4e4e4;
   --btn-hover: #d8d8d8;
   --contrast: #ffffff;
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Courier Prime", ui-monospace, monospace;
   --font-mono: "Geist Mono", ui-monospace, monospace;
-  --text-size: 1rem;
+  --text-size: calc(1rem - 1px);
   --text-tracking: 0.07em;
   --text-leading: 1.6;
   --header-h: 4.5rem;
   --chrome-pad: clamp(3rem, 5vw, 3.2rem);
   --section-gap: clamp(6rem, 10vw, 8rem);
   --nav-gap: 2rem;
-  --chip-pad: 0.35rem 0.55rem;
+  --btn-pad: 0.35rem 1.1rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
@@ -30,7 +31,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 body {
@@ -89,8 +90,9 @@ h3 {
   font-weight: 400;
   letter-spacing: var(--text-tracking);
   text-transform: uppercase;
-  padding: var(--chip-pad);
-  background: var(--ink);
+  padding: var(--btn-pad);
+  border: 0;
+  background: var(--accent);
   color: var(--contrast);
 }
 

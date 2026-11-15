@@ -12,8 +12,8 @@ export function SuccessPage() {
   return (
     <div className="container success-page">
       <h1>Thank you</h1>
-      <p>Payment received. You’ll get a Stripe receipt by email shortly.</p>
-      <p>I’ll pack and ship your order as soon as I can.</p>
+      <p>Payment received. You will get a Stripe receipt by email shortly.</p>
+      <p>I usually get orders out within 24 hours.</p>
       <p className="success-page__action">
         <Link to="/">Back to shop</Link>
       </p>

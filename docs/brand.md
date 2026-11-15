@@ -17,7 +17,15 @@ _Tone for product copy, Instagram, site — TBD_
 
 ## Visual
 
-_Colours, type, imagery rules — TBD (site currently uses Geist Sans / Geist Mono; brand may diverge)_
+| Token | Value | Use |
+|-------|-------|-----|
+| `--ink` | `#262626` | Body / chrome type |
+| `--bg-shop` | `#ededed` | Page ground |
+| `--accent` | `#c23a28` | Vintage warm orange-red; link hover |
+
+Type: Courier Prime via `--font-sans`; root `html` 13px (current). Unused A/B faces (Quattro / Geist) still in `public/fonts`.
+
+**Copy rule:** Body/UI copy stays default size and `--ink` unless it is an active or hover link (then `--accent`). No muted/secondary type for notes.
 
 ## Style references (from Chris Isherwood / &Sons, Aug 2025)
 
