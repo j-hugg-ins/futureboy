@@ -40,4 +40,4 @@ Order emails (seller + customer) use a shared HTML brand wrap: centred `futurebo
 - [x] Branded HTML order emails
 - [x] Netlify TLS for `futureboy.uk` complete
 - [ ] Decide when (if ever) to shut Shopify storefront entirely
-- [ ] Smoke-check branded emails after deploy
+- [ ] Smoke-check branded emails (Stripe event resend or paid order)

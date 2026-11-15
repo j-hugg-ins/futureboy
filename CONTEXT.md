@@ -30,18 +30,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — branded order emails_
+_Last update: 2026-11-15 — branded emails live on master_
 
-**Goal:** Deploy branded Resend emails; confirm on next paid order or webhook resend; decide Shopify residual.
+**Goal:** Smoke-check branded Resend emails (Stripe event resend or paid order); decide Shopify residual.
 
 **Done recently:**
-- Branded HTML order emails (logo wrap, qty-based copy, borderless breakdown, footer)
-- Restored Shermer to £45; seller alert + customer confirmation via Resend
+- Synced to `master` (`5ef1a5c`): branded HTML emails + header light/dark ® SVGs; Netlify deploy ready
+- Logo PNG live at `/brand/futureboy-logo-light-reg.png`
+- Restored Shermer to £45; seller + customer emails via Resend
 - Paid smoke test OK (2026-11-15): £5 Shermer paid; webhook 200; seller email delivered
-- Per-product `pricePence` Checkout; `futureboy.uk` TLS + webhook live
 
 **Next steps:**
-1. Deploy branded emails; smoke-check customer + seller on next paid order (or Stripe event resend)
+1. Smoke branded emails: Stripe Dashboard → Events → resend `checkout.session.completed` (or new paid order)
 2. Decide Shopify residual (`*.myshopify.com` only vs remove)
 3. Refund £5 test payment if not already
 
