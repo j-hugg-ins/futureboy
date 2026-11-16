@@ -41,7 +41,8 @@
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
 - [x] Click and Drop: fulfilment.json + webhook create-order (UK / Europe / RoW)
 - [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
-- [ ] Smoke paid order → Click and Drop portal + seller email note
+- [ ] Smoke paid order (£3 Shermer) → Click and Drop portal + seller email note
+- [ ] Restore Shermer `pricePence` to 4500 after smoke
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
