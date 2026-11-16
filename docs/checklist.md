@@ -1,6 +1,6 @@
 # Current checklist
 
-**Focus:** Paid smoke test on `futureboy.uk`; hobby studio/CWT when time  
+**Focus:** Click and Drop smoke + non-GBP checkout; hobby studio/CWT when time  
 **Detail:** See `CONTEXT.md` · [website.md](website.md) · [studio.md](studio.md)
 
 *Tick in Markdown preview. Commit/sync to persist. Replace this file when focus changes — not an archive.*
@@ -39,6 +39,9 @@
 - [x] Version 2.0.0 in package.json; footer shows version left of © Futureboy year
 - [x] Softened policy/contact/success copy; Terms stock line = small-batch snag-it note
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
+- [x] Click and Drop: fulfilment.json + webhook create-order (UK / Europe / RoW)
+- [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
+- [ ] Smoke paid order → Click and Drop portal + seller email note
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)

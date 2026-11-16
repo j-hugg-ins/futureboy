@@ -30,18 +30,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-15 — Shop nav + Instagram footer_
+_Last update: 2026-11-16 — Click and Drop create-order_
 
-**Goal:** Smoke non-GBP checkout; Shopify residual decision still open.
+**Goal:** Smoke Click and Drop order creation from paid checkout; non-GBP smoke still open.
 
 **Done recently:**
-- Nav: Shop → `/` (product list); Instagram relocated to footer (first)
-- Softened policy/contact/success copy; Terms stock = small-batch “snag it” line
-- v2.0.0; Courier Prime @ 13px; multi-currency presentment
+- Webhook creates Click and Drop orders (UK / Europe / RoW) from Stripe Checkout; seller email notes success/failure
+- Central fulfilment defaults in `src/data/fulfilment.json` (200g, smallParcel, HS 6505003000, origin CHN, DDU_DAP)
+- Nav: Shop → `/`; Instagram in footer; v2.0.0; multi-currency presentment
 **Next steps:**
-1. Smoke non-GBP checkout (EUR or USD) + confirm email totals
-2. Decide Shopify residual (`*.myshopify.com` only vs remove)
-3. Optional later: prune unused A/B font folders (Geist / Quattro)
+1. Smoke a paid order → Click and Drop portal order + seller email note
+2. Smoke non-GBP checkout (EUR or USD) + confirm email totals
+3. Decide Shopify residual (`*.myshopify.com` only vs remove)
 
 **Blockers / landmines:**
 - Do not use Sparkinity Express Stripe for this shop
@@ -79,4 +79,4 @@ _Last update: 2026-11-15 — Shop nav + Instagram footer_
 | CWT | Colourways / CWT Blanks (Karandeep) — UK blank supplier under sampling |
 | Aung Crown | Chinese hat manufacturer (Lydia / Alibaba) — historical production partner |
 | Chris Isherwood / &Sons | Style + home screen-print mentor; early Futureboy collaborator |
-| Click and Drop | Royal Mail UK fulfilment portal (future lean-shop interest; Shopify for now) |
+| Click and Drop | Royal Mail fulfilment portal; API creates orders on paid Checkout (labels printed in portal) |

@@ -4,6 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-16 | Click and Drop: fulfilment.json + webhook create-order; seller email notes result | Smoke paid order in portal (env on Netlify) |
 | 2026-11-15 | Nav: Shop → `/`; Instagram first in footer | Smoke non-GBP checkout |
 | 2026-11-15 | Softened policy/contact/success copy; Terms stock snag-it line | Smoke non-GBP checkout |
 | 2026-11-15 | v2.0.0; footer version + © Futureboy year; Courier Prime @ 13px | /prod then smoke non-GBP checkout |

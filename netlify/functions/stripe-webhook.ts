@@ -1,5 +1,6 @@
 import type { Config, Context } from "@netlify/functions";
 import Stripe from "stripe";
+import { createClickAndDropOrder } from "./_shared/click-and-drop";
 import {
   convertGbpPenceToMinor,
   formatMinorUnits,
@@ -75,6 +76,7 @@ async function shippingMismatchNote(
 
 async function orderFromSession(
   full: Stripe.Checkout.Session,
+  clickAndDrop?: { note: string; ok: boolean } | null,
 ): Promise<OrderEmailData> {
   const paymentId =
     typeof full.payment_intent === "string"
@@ -105,6 +107,8 @@ async function orderFromSession(
     addressLines: shipToLines(full),
     dashboardUrl,
     shippingMismatch: await shippingMismatchNote(full),
+    clickAndDropNote: clickAndDrop?.note || null,
+    clickAndDropOk: clickAndDrop ? clickAndDrop.ok : null,
   };
 }
 
@@ -121,9 +125,33 @@ async function sendOrderEmails(session: Stripe.Checkout.Session) {
 
   const stripe = getStripe();
   const full = await stripe.checkout.sessions.retrieve(session.id, {
-    expand: ["line_items", "payment_intent"],
+    expand: ["line_items", "line_items.data.price.product", "payment_intent"],
   });
-  const order = await orderFromSession(full);
+
+  let clickAndDrop: { note: string; ok: boolean } | null = null;
+  try {
+    const cad = await createClickAndDropOrder(full);
+    clickAndDrop = { note: cad.note, ok: cad.ok };
+    if (cad.ok) {
+      console.log("Click and Drop order created", {
+        orderIdentifier: cad.orderIdentifier,
+        orderReference: cad.orderReference,
+      });
+    } else {
+      console.warn("Click and Drop create failed", cad.note);
+    }
+  } catch (err) {
+    clickAndDrop = {
+      ok: false,
+      note:
+        err instanceof Error
+          ? `Click and Drop unexpected error: ${err.message}`
+          : "Click and Drop unexpected error.",
+    };
+    console.error("Click and Drop create threw", err);
+  }
+
+  const order = await orderFromSession(full, clickAndDrop);
 
   if (order.shippingMismatch) {
     console.warn("Shipping mismatch", order.shippingMismatch);

@@ -19,6 +19,10 @@ export type OrderEmailData = {
   dashboardUrl?: string;
   /** Present when paid shipping does not match address country zone. */
   shippingMismatch?: string | null;
+  /** Click and Drop create-order result or skip/failure note. */
+  clickAndDropNote?: string | null;
+  /** False when create was skipped or failed; true on success. */
+  clickAndDropOk?: boolean | null;
 };
 
 export function publicBase() {
@@ -231,15 +235,25 @@ export function buildSellerEmail(order: OrderEmailData): BuiltEmail {
     ? `<p style="margin:0 0 12px;padding:10px 12px;background:#f8e8e4;color:#8b1e1e;">Shipping check: ${escapeHtml(order.shippingMismatch)}</p>`
     : "";
 
+  const clickAndDropFailed = order.clickAndDropOk === false;
+  const clickAndDropHtml = order.clickAndDropNote
+    ? `<p style="margin:0 0 12px;padding:10px 12px;background:${clickAndDropFailed ? "#f8e8e4" : "#eef6ee"};color:${clickAndDropFailed ? "#8b1e1e" : "#1e5a2a"};">Click and Drop: ${escapeHtml(order.clickAndDropNote)}</p>`
+    : "";
+
   const bodyHtml = `
       ${mismatchHtml}
+      ${clickAndDropHtml}
       <p style="margin:0 0 12px;">New Futureboy order from ${escapeHtml(order.customerEmail || "unknown")}.</p>
       <p style="margin:0 0 4px;font-size:13px;color:#666666;">Ship to</p>
       <p style="margin:0;white-space:pre-line;">${escapeHtml(addressBlock)}</p>
       <p style="margin:20px 0 0;"><a href="${escapeHtml(dashboardUrl)}" style="color:#262626;">Open in Stripe</a></p>`;
 
-  const subject = order.shippingMismatch
-    ? `Futureboy sale: ${total} (shipping check)`
+  const subjectBits = [
+    order.shippingMismatch ? "shipping check" : null,
+    clickAndDropFailed ? "Click and Drop" : null,
+  ].filter(Boolean);
+  const subject = subjectBits.length
+    ? `Futureboy sale: ${total} (${subjectBits.join(", ")})`
     : `Futureboy sale: ${total}`;
 
   return {
@@ -256,6 +270,10 @@ export function buildSellerEmail(order: OrderEmailData): BuiltEmail {
         ? `Shipping check: ${order.shippingMismatch}`
         : null,
       order.shippingMismatch ? "" : null,
+      order.clickAndDropNote
+        ? `Click and Drop: ${order.clickAndDropNote}`
+        : null,
+      order.clickAndDropNote ? "" : null,
       lineSummary(order),
       "",
       orderTableText(order),
