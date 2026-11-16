@@ -5,6 +5,7 @@ import {
   currencyMeta,
   isPresentmentCurrency,
 } from "../../../src/lib/currency";
+import { resolveSessionShipTo } from "./session-shipping";
 
 const API_BASE = "https://api.parcel.royalmail.com/api/v1";
 
@@ -94,20 +95,11 @@ export async function createClickAndDropOrder(
     };
   }
 
-  const details = session.customer_details;
-  const address = details?.address;
-  if (!address?.line1 || !address.country) {
+  const shipTo = resolveSessionShipTo(session);
+  if (!shipTo) {
     return {
       ok: false,
       note: "Click and Drop skipped: checkout session has no shipping address.",
-    };
-  }
-
-  const city = (address.city || "").trim();
-  if (!city) {
-    return {
-      ok: false,
-      note: "Click and Drop skipped: shipping address has no city.",
     };
   }
 
@@ -166,25 +158,23 @@ export async function createClickAndDropOrder(
         orderReference,
         recipient: {
           address: {
-            fullName: truncate(details?.name || "Customer", 210),
-            addressLine1: truncate(address.line1, 100),
-            ...(address.line2
-              ? { addressLine2: truncate(address.line2, 100) }
+            fullName: truncate(shipTo.name || "Customer", 210),
+            addressLine1: truncate(shipTo.line1, 100),
+            ...(shipTo.line2
+              ? { addressLine2: truncate(shipTo.line2, 100) }
               : {}),
-            city: truncate(city, 100),
-            ...(address.state
-              ? { county: truncate(address.state, 100) }
+            city: truncate(shipTo.city, 100),
+            ...(shipTo.state ? { county: truncate(shipTo.state, 100) } : {}),
+            ...(shipTo.postal_code
+              ? { postcode: truncate(shipTo.postal_code, 20) }
               : {}),
-            ...(address.postal_code
-              ? { postcode: truncate(address.postal_code, 20) }
-              : {}),
-            countryCode: truncate(address.country.toUpperCase(), 3),
+            countryCode: truncate(shipTo.country, 3),
           },
-          ...(details?.email
-            ? { emailAddress: truncate(details.email, 254) }
+          ...(shipTo.email
+            ? { emailAddress: truncate(shipTo.email, 254) }
             : {}),
-          ...(details?.phone
-            ? { phoneNumber: truncate(details.phone, 25) }
+          ...(shipTo.phone
+            ? { phoneNumber: truncate(shipTo.phone, 25) }
             : {}),
         },
         packages: [

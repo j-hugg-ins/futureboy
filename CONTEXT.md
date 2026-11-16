@@ -30,18 +30,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-16 — C&D smoke (£3 Shermer)_
+_Last update: 2026-11-16 — Ship-to fix + success layout_
 
-**Goal:** Buy £3 Shermer to smoke Click and Drop; restore £45 after.
+**Goal:** Wait for genuine orders to prove Click and Drop; non-GBP smoke still open.
 
 **Done recently:**
-- Shermer temporarily `pricePence: 300` for C&D smoke
-- Webhook creates Click and Drop orders; fulfilment.json defaults locked
-- Nav: Shop → `/`; Instagram in footer; v2.0.0; multi-currency presentment
+- Ship-to resolves `collected_information.shipping_details` (Link/quick pay) before customer_details
+- Success page matches About/Contact static layout; Shermer restored to £45
+- Checkout Stripe country allowlist; C&D webhook create-order live
 **Next steps:**
-1. Buy Shermer on futureboy.uk; confirm C&D portal + seller email note
-2. Restore Shermer to £45 (`4500`)
-3. Smoke non-GBP checkout; decide Shopify residual
+1. Let a real paid order confirm C&D portal create + seller note
+2. Smoke non-GBP checkout (EUR or USD) + email totals
+3. Decide Shopify residual
 
 **Blockers / landmines:**
 - Do not use Sparkinity Express Stripe for this shop

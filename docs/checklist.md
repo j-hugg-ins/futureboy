@@ -34,6 +34,7 @@
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)
 - [x] Footer/static pages: About-style centred left-aligned layout; no em dashes
+- [x] Success thank-you page uses same static-page layout as About/Contact
 - [x] Presentment currency switcher (GBP/EUR/USD/CAD/JPY); IP default; Stripe Checkout in selected currency
 - [x] Type: Courier Prime on `--font-sans`; root 13px (sticking for now; unused A/B fonts optional prune later)
 - [x] Version 2.0.0 in package.json; footer shows version left of © Futureboy year
@@ -41,8 +42,9 @@
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
 - [x] Click and Drop: fulfilment.json + webhook create-order (UK / Europe / RoW)
 - [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
-- [ ] Smoke paid order (£3 Shermer) → Click and Drop portal + seller email note
-- [ ] Restore Shermer `pricePence` to 4500 after smoke
+- [x] Ship-to prefers Checkout `collected_information.shipping_details` (Link/quick pay)
+- [x] Restore Shermer `pricePence` to 4500 after smoke
+- [ ] Next genuine paid order → confirm Click and Drop portal + seller note
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)

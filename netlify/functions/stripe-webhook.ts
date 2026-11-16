@@ -14,6 +14,10 @@ import {
   type OrderEmailData,
   sendResendEmail,
 } from "./_shared/order-emails";
+import {
+  shipToLinesFromSession,
+  shippingCountryFromSession,
+} from "./_shared/session-shipping";
 import { expectedShippingPence } from "./_shared/shipping";
 
 function getStripe() {
@@ -22,22 +26,10 @@ function getStripe() {
   return new Stripe(key);
 }
 
-function shipToLines(full: Stripe.Checkout.Session) {
-  const address = full.customer_details?.address;
-  if (!address) return ["No address"];
-  return [
-    full.customer_details?.name,
-    address.line1,
-    address.line2,
-    [address.city, address.postal_code].filter(Boolean).join(" "),
-    address.country,
-  ].filter(Boolean) as string[];
-}
-
 async function shippingMismatchNote(
   full: Stripe.Checkout.Session,
 ): Promise<string | null> {
-  const country = full.customer_details?.address?.country;
+  const country = shippingCountryFromSession(full);
   if (!country) return "No shipping country on session; cannot verify rate.";
 
   const currencyCode = (full.currency || "gbp").toLowerCase();
@@ -104,7 +96,7 @@ async function orderFromSession(
     amountTotalPence: full.amount_total || 0,
     customerEmail: full.customer_details?.email || undefined,
     customerName: full.customer_details?.name || undefined,
-    addressLines: shipToLines(full),
+    addressLines: shipToLinesFromSession(full),
     dashboardUrl,
     shippingMismatch: await shippingMismatchNote(full),
     clickAndDropNote: clickAndDrop?.note || null,
