@@ -110,7 +110,7 @@
   list-style: none;
   min-width: max-content;
   background: var(--bg-shop);
-  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  border: 1px solid var(--ink);
   color: var(--ink);
 }
 
