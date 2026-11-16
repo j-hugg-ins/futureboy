@@ -4,6 +4,7 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-16 | Handoff: v2.0.1 on master; custom currency switcher; C&D create-order live | Prove C&D on next paid order; smoke non-GBP |
 | 2026-11-16 | v2.0.1: custom currency switcher with padded options (replaces native select) | Smoke non-GBP; wait for C&D proof order |
 | 2026-11-16 | Ship-to from collected_information; success static layout; Shermer back to £45 | Wait for genuine order to prove C&D |
 | 2026-11-16 | Success page uses static-page layout like About/Contact | Restore Shermer to £45; confirm C&D |

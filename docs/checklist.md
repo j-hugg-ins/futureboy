@@ -45,10 +45,10 @@
 - [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
 - [x] Ship-to prefers Checkout `collected_information.shipping_details` (Link/quick pay)
 - [x] Restore Shermer `pricePence` to 4500 after smoke
+- [x] Stripe paid → C&D Create Orders (create on webhook; labels in portal)
 - [ ] Next genuine paid order → confirm Click and Drop portal + seller note
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
-- [ ] Choose Click & Drop path for futureboy.uk (poll vs ship-from-site vs RM notify); Shopify not in scope for C&D
-- [ ] Optional: Stripe paid → C&D Create Orders; Resend tracking on despatch (no C&D webhook)
+- [ ] Choose despatch-email path (poll UI vs ship-from-site + Resend vs RM notify); no C&D despatch webhook
 - [ ] Decide Shopify residual (`*.myshopify.com` only vs remove)
 - [ ] Price home studio kit in `docs/studio.md` (screen print first)
 - [ ] Act on home print kit / first tee experiments (Development)
