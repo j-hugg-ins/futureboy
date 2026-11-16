@@ -30,14 +30,14 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last update: 2026-11-16 — Ship-to fix + success layout_
+_Last update: 2026-11-16 — v2.0.1 currency switcher_
 
 **Goal:** Wait for genuine orders to prove Click and Drop; non-GBP smoke still open.
 
 **Done recently:**
+- v2.0.1: custom currency switcher (padded list) replaces native `<select>` in header
 - Ship-to resolves `collected_information.shipping_details` (Link/quick pay) before customer_details
 - Success page matches About/Contact static layout; Shermer restored to £45
-- Checkout Stripe country allowlist; C&D webhook create-order live
 **Next steps:**
 1. Let a real paid order confirm C&D portal create + seller note
 2. Smoke non-GBP checkout (EUR or USD) + email totals

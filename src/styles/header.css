@@ -69,16 +69,17 @@
 }
 
 .currency-switcher {
+  position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-.currency-switcher select {
+.currency-switcher__trigger,
+.currency-switcher__option {
   appearance: none;
   background: transparent;
   border: 0;
   border-radius: 0;
-  padding: 0;
   margin: 0;
   font: inherit;
   letter-spacing: inherit;
@@ -87,20 +88,51 @@
   cursor: pointer;
   outline: none;
   box-shadow: none;
+}
+
+.currency-switcher__trigger {
+  padding: 0;
   transition: color 0.35s var(--ease);
 }
 
-.currency-switcher select:hover,
-.currency-switcher select:focus,
-.currency-switcher select:focus-visible {
-  outline: none;
-  box-shadow: none;
-  border: 0;
+.currency-switcher__trigger:hover,
+.currency-switcher__trigger:focus-visible {
+  color: var(--accent);
+}
+
+.currency-switcher__list {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 50;
+  margin: 0;
+  padding: 0.2rem 0;
+  list-style: none;
+  min-width: max-content;
+  background: var(--bg-shop);
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  color: var(--ink);
+}
+
+.currency-switcher__option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  text-align: left;
+  white-space: nowrap;
+  transition: color 0.35s var(--ease);
+}
+
+.currency-switcher__option:hover,
+.currency-switcher__option:focus-visible,
+.currency-switcher__option.is-active,
+.currency-switcher__option[aria-selected="true"] {
   color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .currency-switcher select {
+  .currency-switcher__trigger,
+  .currency-switcher__option {
     transition: none;
   }
 }

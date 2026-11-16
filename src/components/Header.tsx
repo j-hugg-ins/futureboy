@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import {
-  currencyLabel,
-  useCurrency,
-} from "../context/CurrencyContext";
-import type { PresentmentCurrency } from "../lib/currency";
+import { CurrencySwitcher } from "./CurrencySwitcher";
 
 export function Header() {
   const { itemCount } = useCart();
-  const { currency, setCurrency, currencies } = useCurrency();
 
   return (
     <header className="site-header site-header--solid">
@@ -36,22 +31,7 @@ export function Header() {
       </Link>
 
       <div className="nav-right">
-        <label className="currency-switcher">
-          <span className="sr-only">Currency</span>
-          <select
-            value={currency}
-            aria-label="Currency"
-            onChange={(e) =>
-              setCurrency(e.target.value as PresentmentCurrency)
-            }
-          >
-            {currencies.map((code) => (
-              <option key={code} value={code}>
-                {currencyLabel(code)}
-              </option>
-            ))}
-          </select>
-        </label>
+        <CurrencySwitcher />
         <Link
           to="/cart"
           className="cart-link"
