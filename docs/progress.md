@@ -4,7 +4,8 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
-| 2026-11-16 | Drop Stripe-unsupported RoW codes VI/AS/MP from allowed countries | Retry £3 Shermer checkout |
+| 2026-11-16 | Checkout allowed_countries = full Stripe shipping enum (drop curated RoW list) | Retry £3 Shermer checkout |
+| 2026-11-16 | Drop Stripe-unsupported RoW codes VI/AS/MP from allowed countries | Superseded by full Stripe allowlist |
 | 2026-11-16 | Shermer temporarily £3 for Click and Drop paid smoke | Buy Shermer; restore £45 after |
 | 2026-11-16 | Click and Drop: fulfilment.json + webhook create-order; seller email notes result | Smoke paid order in portal (env on Netlify) |
 | 2026-11-15 | Nav: Shop → `/`; Instagram first in footer | Smoke non-GBP checkout |

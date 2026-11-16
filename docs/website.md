@@ -19,7 +19,7 @@ Commerce and site stack for Future Boy.
 - Webhook event: `checkout.session.completed` → `/api/stripe-webhook` (seller email flags shipping rate vs address country mismatch)
 - Cart shipping: `/api/shipping-estimate` uses Netlify geo; final rate chosen in Stripe Checkout from address
 - Presentment currency: header switcher (GBP / EUR / USD / CAD / JPY); IP default via `/api/currency-rates` + Netlify geo; override in `localStorage`. Catalogue stays GBP in JSON; Checkout `price_data` and shipping options convert via Stripe Exchange Rates so display and charge match. JPY is zero-decimal.
-- Checkout: all UK / Europe / ROW rates offered; allowed countries = union of zones
+- Checkout: all UK / Europe / ROW rates offered; `allowed_countries` = Stripe Checkout shipping enum (`STRIPE_CHECKOUT_SHIPPING_COUNTRIES` in `shipping.ts`); zone rates still GB / Europe / RoW
 - Env names: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `PUBLIC_URL` (Netlify reserves `URL`), `RESEND_API_KEY`, `SALE_NOTIFY_EMAIL`, `SALE_NOTIFY_FROM`, `EMAIL_PREVIEW_SECRET`, `CLICK_AND_DROP_API_KEY`
 - Fulfilment defaults: `src/data/fulfilment.json` (packed weight, package format, HS code, origin, delivery term)
 - On `checkout.session.completed`, webhook creates a Click and Drop order (UK / Europe / RoW) then sends emails; C&D failure is noted in the seller email and does not block the sale receipt. Labels are printed in the Click and Drop portal.
