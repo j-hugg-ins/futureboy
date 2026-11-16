@@ -30,21 +30,18 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last handoff: 2026-11-15 — branch `develop`_
+_Last update: 2026-11-16 — Ship-to fix + success layout_
 
-**Goal:** Decide Click & Drop fulfilment shape for futureboy.uk (Stripe only); smoke non-GBP checkout still pending.
+**Goal:** Wait for genuine orders to prove Click and Drop; non-GBP smoke still open.
 
-**Done this session:**
-- Researched Royal Mail Click & Drop custom API for futureboy.uk (Shopify out of scope for this)
-- Confirmed API can create orders, fetch tracking/labels (OBA for label PDFs), mark despatched
-- Confirmed **no C&D inbound webhook** on despatch; Shopify-era tracking email was the channel app writing back into Shopify
-- Customer shipped email must be Resend (or RM’s own recipient notifications), not a C&D callback
-
+**Done recently:**
+- Ship-to resolves `collected_information.shipping_details` (Link/quick pay) before customer_details
+- Success page matches About/Contact static layout; Shermer restored to £45
+- Checkout Stripe country allowlist; C&D webhook create-order live
 **Next steps:**
-1. Choose despatch-email path: **poll C&D** while using their UI, or **ship from futureboy.uk** (mark despatched + Resend), or rely on RM recipient notifications
-2. If building: Stripe `checkout.session.completed` → `POST` Create Orders on C&D; store `orderIdentifier`; later Resend tracking mail
-3. Smoke non-GBP checkout (EUR or USD) + confirm email totals
-4. Decide Shopify residual (`*.myshopify.com` only vs remove) — separate from C&D
+1. Let a real paid order confirm C&D portal create + seller note
+2. Smoke non-GBP checkout (EUR or USD) + email totals
+3. Decide Shopify residual
 
 **Blockers / landmines:**
 - Do not wait for a Click & Drop despatch webhook (not in the published API)
@@ -86,6 +83,6 @@ _Last handoff: 2026-11-15 — branch `develop`_
 | CWT | Colourways / CWT Blanks (Karandeep) — UK blank supplier under sampling |
 | Aung Crown | Chinese hat manufacturer (Lydia / Alibaba) — historical production partner |
 | Chris Isherwood / &Sons | Style + home screen-print mentor; early Futureboy collaborator |
-| Click and Drop | Royal Mail fulfilment portal + custom API (`api.parcel.royalmail.com`); target for futureboy.uk Stripe orders (not Shopify) |
+| Click and Drop | Royal Mail fulfilment portal; API creates orders on paid Checkout (labels printed in portal) |
 | OBA | Royal Mail Online Business Account — required for C&D API label PDF retrieval |
 | OLP | Online Postage account — cannot retrieve labels/docs via C&D API |

@@ -5,8 +5,7 @@ a.link-tab,
 .footer-links a,
 .static-page__prose a,
 .static-page__copy a,
-.cart-page a:not(:has(img)):not(.btn),
-.success-page a {
+.cart-page a:not(:has(img)):not(.btn) {
   color: var(--ink);
   text-decoration: none;
   text-decoration-line: none;
@@ -26,9 +25,7 @@ a.link-tab:focus-visible,
 .static-page__copy a:hover,
 .static-page__copy a:focus-visible,
 .cart-page a:not(:has(img)):not(.btn):hover,
-.cart-page a:not(:has(img)):not(.btn):focus-visible,
-.success-page a:hover,
-.success-page a:focus-visible {
+.cart-page a:not(:has(img)):not(.btn):focus-visible {
   color: var(--accent);
   text-decoration: none;
   text-decoration-line: none;
@@ -41,8 +38,7 @@ a.link-tab:focus-visible,
   .footer-links a,
   .static-page__prose a,
   .static-page__copy a,
-  .cart-page a:not(:has(img)):not(.btn),
-  .success-page a {
+  .cart-page a:not(:has(img)):not(.btn) {
     transition: none;
   }
 }

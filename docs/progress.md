@@ -4,6 +4,12 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-16 | Ship-to from collected_information; success static layout; Shermer back to £45 | Wait for genuine order to prove C&D |
+| 2026-11-16 | Success page uses static-page layout like About/Contact | Restore Shermer to £45; confirm C&D |
+| 2026-11-16 | Checkout allowed_countries = full Stripe shipping enum (drop curated RoW list) | Retry £3 Shermer checkout |
+| 2026-11-16 | Drop Stripe-unsupported RoW codes VI/AS/MP from allowed countries | Superseded by full Stripe allowlist |
+| 2026-11-16 | Shermer temporarily £3 for Click and Drop paid smoke | Buy Shermer; restore £45 after |
+| 2026-11-16 | Click and Drop: fulfilment.json + webhook create-order; seller email notes result | Smoke paid order in portal (env on Netlify) |
 | 2026-11-15 | Handoff: C&D API research for futureboy.uk only; no despatch webhook; Shopify out of C&D scope | Choose poll vs ship-from-site vs RM notify |
 | 2026-11-15 | Nav: Shop → `/`; Instagram first in footer | Smoke non-GBP checkout |
 | 2026-11-15 | Softened policy/contact/success copy; Terms stock snag-it line | Smoke non-GBP checkout |

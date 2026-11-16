@@ -1,6 +1,6 @@
 # Current checklist
 
-**Focus:** Paid smoke test on `futureboy.uk`; hobby studio/CWT when time  
+**Focus:** Click and Drop smoke + non-GBP checkout; hobby studio/CWT when time  
 **Detail:** See `CONTEXT.md` · [website.md](website.md) · [studio.md](studio.md)
 
 *Tick in Markdown preview. Commit/sync to persist. Replace this file when focus changes — not an archive.*
@@ -34,11 +34,17 @@
 - [x] Netlify TLS on `futureboy.uk`; shop + webhook on custom domain (verified 2026-11-15)
 - [x] Checkout uses per-product `pricePence` (not global constant)
 - [x] Footer/static pages: About-style centred left-aligned layout; no em dashes
+- [x] Success thank-you page uses same static-page layout as About/Contact
 - [x] Presentment currency switcher (GBP/EUR/USD/CAD/JPY); IP default; Stripe Checkout in selected currency
 - [x] Type: Courier Prime on `--font-sans`; root 13px (sticking for now; unused A/B fonts optional prune later)
 - [x] Version 2.0.0 in package.json; footer shows version left of © Futureboy year
 - [x] Softened policy/contact/success copy; Terms stock line = small-batch snag-it note
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
+- [x] Click and Drop: fulfilment.json + webhook create-order (UK / Europe / RoW)
+- [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
+- [x] Ship-to prefers Checkout `collected_information.shipping_details` (Link/quick pay)
+- [x] Restore Shermer `pricePence` to 4500 after smoke
+- [ ] Next genuine paid order → confirm Click and Drop portal + seller note
 - [ ] Smoke non-GBP checkout (e.g. EUR) + confirm email totals match session currency
 - [ ] Choose Click & Drop path for futureboy.uk (poll vs ship-from-site vs RM notify); Shopify not in scope for C&D
 - [ ] Optional: Stripe paid → C&D Create Orders; Resend tracking on despatch (no C&D webhook)

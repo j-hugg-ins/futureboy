@@ -462,14 +462,12 @@
   text-align: center;
 }
 
-.cart-page,
-.success-page {
+.cart-page {
   padding: 2.5rem 0 4rem;
   animation: fade-up 0.5s var(--ease) both;
 }
 
-.cart-page h1,
-.success-page h1 {
+.cart-page h1 {
   margin-bottom: 1.75rem;
 }
 
@@ -579,10 +577,6 @@
 .cart-totals dt:last-of-type,
 .cart-totals dd:last-of-type {
   border-bottom: none;
-}
-
-.success-page__action {
-  margin: 1.5rem 0 0;
 }
 
 .form {
