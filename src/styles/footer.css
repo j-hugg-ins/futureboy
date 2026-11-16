@@ -42,3 +42,18 @@
 .footer-copy {
   margin: 0;
 }
+
+@media (max-width: 640px) {
+  .footer-links {
+    display: none;
+  }
+
+  .footer-inner {
+    justify-content: center;
+  }
+
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+  }
+}

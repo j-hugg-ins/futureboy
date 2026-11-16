@@ -4,6 +4,9 @@ Append-only notes when substantive work completes. Agents add a row; humans may 
 
 | Date | What changed | Next |
 |------|--------------|------|
+| 2026-11-16 | Cart mobile: two-row stack (thumb+info / qty+total+remove) at ≤640px | Review in DevTools; deploy with chrome when happy |
+| 2026-11-16 | Mobile nav: footer links pin to bottom; close X above panel with colour fade | Review locally; deploy when happy |
+| 2026-11-16 | Mobile hamburger + full-bleed ink nav panel; slim footer (version/© only) | Review locally; deploy when happy |
 | 2026-11-16 | Currency switcher list border uses full `--ink` (not faded mix) | /sync or /prod when ready |
 | 2026-11-16 | Handoff: v2.0.1 on master; custom currency switcher; C&D create-order live | Prove C&D on next paid order; smoke non-GBP |
 | 2026-11-16 | v2.0.1: custom currency switcher with padded options (replaces native select) | Smoke non-GBP; wait for C&D proof order |

@@ -41,6 +41,8 @@
 - [x] Version 2.0.1 in package.json; footer shows version left of © Futureboy year
 - [x] Softened policy/contact/success copy; Terms stock line = small-batch snag-it note
 - [x] Nav: Shop → `/` (home); Instagram moved to footer first
+- [x] Mobile chrome: hamburger + cart; ink slide-over (primary, currency, footer links); slim footer
+- [x] Cart row: two-row stack at ≤640px (thumb+info / qty+line+remove)
 - [x] Click and Drop: fulfilment.json + webhook create-order (UK / Europe / RoW)
 - [x] Set `CLICK_AND_DROP_API_KEY` on Netlify
 - [x] Ship-to prefers Checkout `collected_information.shipping_details` (Link/quick pay)

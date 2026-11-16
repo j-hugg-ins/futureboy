@@ -30,30 +30,32 @@ Personal boutique apparel label — retro vintage Americana trucker hats and cap
 
 ## Current work
 
-_Last handoff: 2026-11-16 — branch `develop` (prod `master` at v2.0.1)_
+_Last handoff: 2026-11-16 — branch `develop` (shipping mobile polish to `master`)_
 
-**Goal:** Prove Click and Drop from a real paid order; smoke non-GBP checkout.
+**Goal:** Prove C&D on next paid order; smoke non-GBP checkout.
 
 **Done this session:**
-- Custom currency switcher (padded listbox) replaced native `<select>`; shipped as **v2.0.1** via `/prod`
-- `develop` caught up with `master` (merge + doc conflict resolve) before release
-- Prior same-day: ship-to from `collected_information`; success static layout; Shermer £45; C&D create-order on webhook
+- Mobile ≤640px chrome: hamburger + cart; full-bleed ink slide-over (shop/about/contact, currency, footer links); slim footer (version/©)
+- Cart ≤640px: two-row stack (thumb + title/unit price; then qty, line total, remove) — preview needs rebuild to see
+- Currency switcher border uses full `--ink`
+- Earlier: **v2.0.1** custom currency switcher; C&D create-order on webhook
 
 **Next steps:**
-1. Next genuine paid order → confirm C&D portal order + seller email note
-2. Smoke non-GBP checkout (EUR or USD) + confirm email totals match session currency
-3. Decide despatch-email path (poll C&D UI vs ship-from-site + Resend vs RM recipient notify)
-4. Decide Shopify residual (`*.myshopify.com` only vs remove)
+1. Confirm production deploy of mobile chrome + cart row on https://futureboy.uk
+2. Next genuine paid order → confirm C&D portal order + seller email note
+3. Smoke non-GBP checkout (EUR or USD) + confirm email totals match session currency
+4. Decide despatch-email path; Shopify residual
 
 **Blockers / landmines:**
 - No C&D inbound webhook on despatch; do not wait for one
 - One C&D API integration per account; `CLICK_AND_DROP_API_KEY` env only
 - Label PDFs need OBA (not OLP)
+- Local `vite preview` serves stale `dist` until `npm run build`; prefer `npm run dev` for CSS HMR
 - Sparkinity Express Stripe is wrong account; never read `.env` into chat; leave MX + Resend DNS alone
 
-**Suggested skills:** `/sync`, `/prod`, `/grilling` (despatch-email path)
+**Suggested skills:** `/grilling` (despatch-email path), `/sync`, `/prod`
 
-**Artifacts:** `src/components/CurrencySwitcher.tsx`, `src/styles/header.css`, `netlify/functions/_shared/click-and-drop.ts`, `docs/website.md`, package `2.0.1`
+**Artifacts:** `src/components/Header.tsx`, `src/styles/header.css`, `src/styles/footer.css`, `src/styles/pages.css` (cart row), `src/styles/links.css`, package `2.0.1`
 
 ## Open items
 
